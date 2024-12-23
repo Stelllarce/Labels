@@ -1,0 +1,2 @@
+add_subdirectory(labels)
+add_subdirectory(services)
