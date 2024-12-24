@@ -6,14 +6,17 @@ target_link_libraries(
     PRIVATE
         labels
         services
+        utils
         Catch2::Catch2WithMain
 )
 
 target_sources(
     unit-tests
     PRIVATE
-        "test-simple-label.cpp"
-        "test-label-printer.cpp"
+        "label-tests/test-simple-label.cpp"
+        "label-tests/test-rich-label.cpp"
+        "service-tests/test-label-printer.cpp"
+        "utils-tests/test-font.cpp"
 )
 
 # Automatically register all tests

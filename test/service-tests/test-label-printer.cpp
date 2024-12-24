@@ -2,7 +2,7 @@
 #include "services/LabelPrinter.hpp"
 #include <sstream>
 
-TEST_CASE("LabelPrinter test", "[LabelPrinter]") {
+TEST_CASE("General tests", "[LabelPrinter]") {
     std::ostringstream output;
     SECTION("Print SimpleLabel") {
         LabelPrinter labelPrinter;
