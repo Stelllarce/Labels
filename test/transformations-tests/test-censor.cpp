@@ -7,13 +7,13 @@ TEST_CASE("Single occurance censoring", "[CensorTransformation]") {
 }
 
 TEST_CASE("Multiple occurances censoring", "[CensorTransformation]") {
-    CensorTransformation censor("nibba");
-    REQUIRE(censor.transform("Hey, nibba, what up, my nibba") == "Hey, *****, what up, my *****");
+    CensorTransformation censor("brother");
+    REQUIRE(censor.transform("Hey, brother, what up, my brother") == "Hey, *******, what up, my *******");
 }
 
 TEST_CASE("Word to censor is contained in a word", "[CensorTransformation]") {
-    CensorTransformation censor("bb");
-    REQUIRE(censor.transform("Hey, nibba, what up, my nibba") == "Hey, ni**a, what up, my ni**a");
+    CensorTransformation censor("ther");
+    REQUIRE(censor.transform("Hey, brother, what up, my brother") == "Hey, bro****, what up, my bro****");
 }
 
 TEST_CASE("Edge case with same letters", "[CensorTransformation]") {
