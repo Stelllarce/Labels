@@ -27,6 +27,7 @@ target_sources(
         "transformations-tests/test-censor.cpp"
         "transformations-tests/test-replace.cpp"
         "decorators-tests/test-text-transformation-individual.cpp"
+        "decorators-tests/test-text-transformation-stacked.cpp"
 )
 
 # Automatically register all tests
