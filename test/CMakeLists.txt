@@ -8,6 +8,7 @@ target_link_libraries(
         services
         utils
         transformations
+        decorators
         Catch2::Catch2WithMain
 )
 
@@ -25,6 +26,7 @@ target_sources(
         "transformations-tests/test-decorate.cpp"
         "transformations-tests/test-censor.cpp"
         "transformations-tests/test-replace.cpp"
+        "decorators-tests/test-text-transformation-individual.cpp"
 )
 
 # Automatically register all tests
