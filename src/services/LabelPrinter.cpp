@@ -1,6 +1,5 @@
 #include "LabelPrinter.hpp"
 
-void LabelPrinter::print(const Label& label, std::ostringstream* output) const {
-    *output << label.getText() << std::endl;
-    std::cout << label.getText() << std::endl;
+void LabelPrinter::print(const Label& label, std::ostream& output) const {
+    output << LABEL_PREFIX << label.getText() << std::endl;
 }
