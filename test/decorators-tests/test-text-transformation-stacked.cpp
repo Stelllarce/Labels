@@ -9,6 +9,7 @@
 #include "transformations/RightTrimTransformation.hpp"
 #include "transformations/NormalizeSpaceTransformation.hpp"
 #include "transformations/ReplaceTransformation.hpp"
+#include "transformations/DecorateTransformation.hpp"
 
 SCENARIO("Applying sequential transformations on labels using TransformationDecorator") {
     
@@ -62,6 +63,17 @@ SCENARIO("Applying sequential transformations on labels using TransformationDeco
                         THEN("Trailing spaces should be removed") {
                             REQUIRE(simple_label->getText() == "This label describes a design pattern!");
                             REQUIRE(rich_label->getText() == "This is another label, that uses a rich font!");
+                        }
+                        WHEN("A DecorateTransformation is applied") {
+                            simple_label = std::make_shared<TextTransformationDecorator>(
+                                std::move(simple_label), std::make_unique<DecorateTransformation>());
+                            rich_label = std::make_shared<TextTransformationDecorator>(
+                                std::move(rich_label), std::make_unique<DecorateTransformation>());
+
+                            THEN("The text should be enclosed in square brackets") {
+                                REQUIRE(simple_label->getText() == "-={ This label describes a design pattern! }=-");
+                                REQUIRE(rich_label->getText() == "-={ This is another label, that uses a rich font! }=-");
+                            }
                         }
                     }
                 }

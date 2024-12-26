@@ -9,6 +9,7 @@
 #include "transformations/RightTrimTransformation.hpp"
 #include "transformations/NormalizeSpaceTransformation.hpp"
 #include "transformations/ReplaceTransformation.hpp"
+#include "transformations/DecorateTransformation.hpp"
 #include "services/LabelPrinter.hpp" // Include the LabelPrinter header
 
 class TransformationTestFixture {
@@ -109,4 +110,14 @@ TEST_CASE_METHOD(TransformationTestFixture, "Test Replace Transformation") {
     setupRichLabel("designing a pattern");
     applyReplaceTransformation(richLabel, "atter", "la");
     REQUIRE(printLabel(richLabel) == "Here is a label: designing a plan\n");
+}
+
+TEST_CASE_METHOD(TransformationTestFixture, "Test Decorate Transformation") {
+    setupSimpleLabel("very pretty text");
+    applyTransformation<DecorateTransformation>(simpleLabel);
+    REQUIRE(printLabel(simpleLabel) == "Here is a label: -={ very pretty text }=-\n");
+
+    setupRichLabel("very pretty text");
+    applyTransformation<DecorateTransformation>(richLabel);
+    REQUIRE(printLabel(richLabel) == "Here is a label: -={ very pretty text }=-\n");
 }
