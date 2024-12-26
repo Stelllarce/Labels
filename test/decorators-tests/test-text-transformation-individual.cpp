@@ -9,6 +9,7 @@
 #include "transformations/RightTrimTransformation.hpp"
 #include "transformations/NormalizeSpaceTransformation.hpp"
 #include "transformations/ReplaceTransformation.hpp"
+#include "services/LabelPrinter.hpp" // Include the LabelPrinter header
 
 class TransformationTestFixture {
 protected:
@@ -41,64 +42,71 @@ protected:
             std::move(label), std::make_unique<ReplaceTransformation>(from, to)
         );
     }
+
+    std::string printLabel(std::unique_ptr<Label>& label) {
+        std::ostringstream oss;
+        LabelPrinter printer;
+        printer.print(*label, oss);
+        return oss.str();
+    }
 };
 
 TEST_CASE_METHOD(TransformationTestFixture, "Test Capitalization Transformation") {
     setupSimpleLabel("designing a pattern");
     applyTransformation<CapitalizeTransformation>(simpleLabel);
-    REQUIRE(simpleLabel->getText() == "Designing a pattern");
+    REQUIRE(printLabel(simpleLabel) == "Here is a label: Designing a pattern\n");
 
     setupRichLabel("designing a pattern");
     applyTransformation<CapitalizeTransformation>(richLabel);
-    REQUIRE(richLabel->getText() == "Designing a pattern");
+    REQUIRE(printLabel(richLabel) == "Here is a label: Designing a pattern\n");
 }
 
 TEST_CASE_METHOD(TransformationTestFixture, "Test Censor Transformation") {
     setupSimpleLabel("designing a pattern");
     applyCensorTransformation(simpleLabel, "atter");
-    REQUIRE(simpleLabel->getText() == "designing a p*****n");
+    REQUIRE(printLabel(simpleLabel) == "Here is a label: designing a p*****n\n");
 
     setupRichLabel("designing a pattern");
     applyCensorTransformation(richLabel, "e");
-    REQUIRE(richLabel->getText() == "d*signing a patt*rn");
+    REQUIRE(printLabel(richLabel) == "Here is a label: d*signing a patt*rn\n");
 }
 
 TEST_CASE_METHOD(TransformationTestFixture, "Test Left Trim Transformation") {
     setupSimpleLabel("   designing a pattern");
     applyTransformation<LeftTrimTransformation>(simpleLabel);
-    REQUIRE(simpleLabel->getText() == "designing a pattern");
+    REQUIRE(printLabel(simpleLabel) == "Here is a label: designing a pattern\n");
 
     setupRichLabel("   designing a pattern");
     applyTransformation<LeftTrimTransformation>(richLabel);
-    REQUIRE(richLabel->getText() == "designing a pattern");
+    REQUIRE(printLabel(richLabel) == "Here is a label: designing a pattern\n");
 }
 
 TEST_CASE_METHOD(TransformationTestFixture, "Test Right Trim Transformation") {
     setupSimpleLabel("designing a pattern   ");
     applyTransformation<RightTrimTransformation>(simpleLabel);
-    REQUIRE(simpleLabel->getText() == "designing a pattern");
+    REQUIRE(printLabel(simpleLabel) == "Here is a label: designing a pattern\n");
 
     setupRichLabel("designing a pattern   ");
     applyTransformation<RightTrimTransformation>(richLabel);
-    REQUIRE(richLabel->getText() == "designing a pattern");
+    REQUIRE(printLabel(richLabel) == "Here is a label: designing a pattern\n");
 }
 
 TEST_CASE_METHOD(TransformationTestFixture, "Test Normalize Space Transformation") {
     setupSimpleLabel("designing  a           pattern");
     applyTransformation<NormalizeSpaceTransformation>(simpleLabel);
-    REQUIRE(simpleLabel->getText() == "designing a pattern");
+    REQUIRE(printLabel(simpleLabel) == "Here is a label: designing a pattern\n");
 
     setupRichLabel("designing             a  pattern");
     applyTransformation<NormalizeSpaceTransformation>(richLabel);
-    REQUIRE(richLabel->getText() == "designing a pattern");
+    REQUIRE(printLabel(richLabel) == "Here is a label: designing a pattern\n");
 }
 
 TEST_CASE_METHOD(TransformationTestFixture, "Test Replace Transformation") {
     setupSimpleLabel("designing a pattern");
     applyReplaceTransformation(simpleLabel, "pattern", "anti-pattern");
-    REQUIRE(simpleLabel->getText() == "designing a anti-pattern");
+    REQUIRE(printLabel(simpleLabel) == "Here is a label: designing a anti-pattern\n");
 
     setupRichLabel("designing a pattern");
     applyReplaceTransformation(richLabel, "atter", "la");
-    REQUIRE(richLabel->getText() == "designing a plan");
+    REQUIRE(printLabel(richLabel) == "Here is a label: designing a plan\n");
 }
