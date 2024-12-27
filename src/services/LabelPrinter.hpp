@@ -1,5 +1,5 @@
 #pragma once
-#include "labels/SimpleLabel.hpp"
+#include "labels/Label.hpp"
 #include <iostream>
 #include <sstream>
 
