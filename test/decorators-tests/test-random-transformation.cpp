@@ -22,9 +22,14 @@ SCENARIO("No transformations are given") {
 
         std::vector<std::unique_ptr<TextTransformation>> transformations;
         WHEN("A RandomTransformationDecorator is applied") {
-            THEN("An exception should be thrown") {
-                REQUIRE_THROWS_AS(std::make_shared<RandomTransformationDecorator>(simple_label, transformations), std::invalid_argument);
-                REQUIRE_THROWS_AS(std::make_shared<RandomTransformationDecorator>(rich_label, transformations), std::invalid_argument);
+            THEN("The original text should undergo no changes") {
+                simple_label = std::make_shared<RandomTransformationDecorator>(
+                    std::move(simple_label), transformations);
+                rich_label = std::make_shared<RandomTransformationDecorator>(
+                    std::move(rich_label), transformations);
+
+                REQUIRE(simple_label->getText() == " crap! This is  very bad! ");
+                REQUIRE(rich_label->getText() == " you   bad boy! Don't crap   on the  carpet!  ");
             }
         }
     }

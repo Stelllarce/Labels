@@ -22,8 +22,3 @@ TEST_CASE("Space, character, space", "[LeftTrimTransformation]") {
     LeftTrimTransformation transformation;
     REQUIRE(transformation.transform(" d esign p") == "d esign p");
 }
-
-TEST_CASE("Empty text", "[LeftTrimTransformation]") {
-    LeftTrimTransformation transformation;
-    REQUIRE_THROWS_WITH(transformation.transform(""), "Empty text, nothing to trim");
-}

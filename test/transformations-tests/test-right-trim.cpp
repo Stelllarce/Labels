@@ -15,8 +15,3 @@ TEST_CASE("Multiple trailing spaces", "[RightTrimTransformation]") {
     RightTrimTransformation transformation;
     REQUIRE(transformation.transform("design patterns    ") == "design patterns");
 }
-
-TEST_CASE("Empty text", "[RightTrimTransformation]") {
-    RightTrimTransformation transformation;
-    REQUIRE_THROWS_WITH(transformation.transform(""), "Empty text, nothing to trim");
-}

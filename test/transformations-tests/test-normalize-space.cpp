@@ -28,8 +28,3 @@ TEST_CASE("Consecutive spaces in the middle and back", "[NormalizeTextTransforma
     std::string expected = "This is a test.";
     REQUIRE(transformer.transform(input) == expected);
 }
-
-TEST_CASE("Empty text", "[NormalizeTextTransformation]") {
-    NormalizeSpaceTransformation transformer;
-    REQUIRE_THROWS_WITH(transformer.transform(""), "Empty text, nothing to normalize");
-}

@@ -1,7 +1,7 @@
 #include "NormalizeSpaceTransformation.hpp"
 
 std::string NormalizeSpaceTransformation::transform(const std::string& text) const {
-    if (text.empty()) throw std::invalid_argument("Empty text, nothing to normalize");
+    if (text.empty()) return text;
     
     std::string modified;
     bool first_space = false;

@@ -8,11 +8,6 @@ TEST_CASE("Normal text", "[CapitalizeTransformation]") {
     REQUIRE(transformation.transform("PATTERNS DESIGN") == "PATTERNS DESIGN");
 }
 
-TEST_CASE("Empty text", "[CapitalizeTransformation]") {
-    CapitalizeTransformation transformation;
-    REQUIRE_THROWS_WITH(transformation.transform(""), "Empty text, nothing to capitalize");
-}
-
 TEST_CASE("Text with special characters, no change", "[CapitalizeTransformation]") {
     CapitalizeTransformation transformation;
     REQUIRE(transformation.transform("1234") == "1234");

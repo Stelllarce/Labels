@@ -6,11 +6,10 @@ RandomTransformationDecorator::RandomTransformationDecorator(
     long seed)
     : LabelDecoratorBase(std::move(label)), 
     transformations(transformations),
-    seed(seed) {
-        if (transformations.empty()) throw std::invalid_argument("No transformations given");
-    }
+    seed(seed) {}
 
 std::string RandomTransformationDecorator::getText() const {
+    if (transformations.empty()) return LabelDecoratorBase::label->getText();
     std::srand(seed);
     size_t random_index = std::rand() % transformations.size();
     return transformations[random_index]->transform(LabelDecoratorBase::label->getText());

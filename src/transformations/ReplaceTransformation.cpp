@@ -1,11 +1,9 @@
 #include "ReplaceTransformation.hpp"
 
-ReplaceTransformation::ReplaceTransformation(const std::string& to_replace, const std::string& replacement) : to_replace(to_replace), replacement(replacement) {
-    if (to_replace.empty()) throw std::invalid_argument("No argument for replacement given");
-}
+ReplaceTransformation::ReplaceTransformation(const std::string& to_replace, const std::string& replacement) : to_replace(to_replace), replacement(replacement) {}
 
 std::string ReplaceTransformation::transform(const std::string& text) const {
-    if (text.empty()) throw std::invalid_argument("Empty text, nothing to replace");
+    if (text.empty() || to_replace.empty() || replacement.empty()) return text;
 
     std::string modified = text;
     size_t pos = modified.find(to_replace);

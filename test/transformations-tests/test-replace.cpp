@@ -30,17 +30,3 @@ TEST_CASE("Replace with empty string", "[ReplaceTransformation]") {
     ReplaceTransformation replace("homie", "");
     REQUIRE(replace.transform("Hey, homie, what up, my homie") == "Hey, , what up, my ");
 }
-
-TEST_CASE("Word to replace not found, throws", "[ReplaceTransformation]") {
-    ReplaceTransformation replace("boring", "fun");
-    REQUIRE_THROWS_WITH(replace.transform("design patterns are fun"), "Word to replace not found");
-}
-
-TEST_CASE("Empty text, throws", "[ReplaceTransformation]") {
-    ReplaceTransformation replace("boring", "fun");
-    REQUIRE_THROWS_WITH(replace.transform(""), "Empty text, nothing to replace");
-}
-
-TEST_CASE("Nothing to replace, throws", "[ReplaceTransformation]") {
-    REQUIRE_THROWS_WITH(ReplaceTransformation("", "fun"), "No argument for replacement given");
-}

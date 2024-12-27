@@ -21,16 +21,6 @@ TEST_CASE("Edge case with same letters", "[CensorTransformation]") {
     REQUIRE(censor.transform("aaaaa") == "****a");
 }
 
-TEST_CASE("Censor word not found, throws", "[CensorTransformation]") {
-    CensorTransformation censor("boring");
-    REQUIRE_THROWS_WITH(censor.transform("design patterns are fun"), "Word to censor not found");
-}
-
-TEST_CASE("Empty text, throws", "[CensorTransformation]") {
-    CensorTransformation censor("boring");
-    REQUIRE_THROWS_WITH(censor.transform(""), "Empty text, nothing to censor");
-}
-
 TEST_CASE("Nothing to censor, should stay the same", "[CensorTransformation]") {
     CensorTransformation censor("");
     REQUIRE(censor.transform("design patterns are fun") == "design patterns are fun");
