@@ -19,6 +19,7 @@ target_sources(
         "label-tests/test-rich-label.cpp"
         "service-tests/test-label-printer.cpp"
         "utils-tests/test-font.cpp"
+        "utils-tests/test-color.cpp"
         "transformations-tests/test-capitalization.cpp"
         "transformations-tests/test-left-trim.cpp"
         "transformations-tests/test-right-trim.cpp"
@@ -28,6 +29,7 @@ target_sources(
         "transformations-tests/test-replace.cpp"
         "decorators-tests/test-text-transformation-individual.cpp"
         "decorators-tests/test-text-transformation-stacked.cpp"
+        "decorators-tests/test-random-transformation.cpp"
 )
 
 # Automatically register all tests

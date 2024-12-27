@@ -7,4 +7,5 @@ target_sources(
     PRIVATE
         "LabelDecoratorBase.cpp"
         "TextTransformationDecorator.cpp"
+        "RandomTransformationDecorator.cpp"
 )
