@@ -11,3 +11,9 @@ Color::Color(uint32_t hex_color) : color(hex_color) {
 uint32_t Color::getColor() const {
     return color;
 }
+
+std::string Color::hexColorToString() const {
+    std::stringstream ss;
+    ss << "0x" << std::hex << std::uppercase << color;
+    return ss.str();
+}
