@@ -14,3 +14,8 @@ TEST_CASE("Valid color, rgb ctor", "[Color]") {
 TEST_CASE("Color greater than max", "[Color]") {
     REQUIRE_THROWS_AS(Color(0x1000000), std::invalid_argument);
 }
+
+TEST_CASE("Hex to string", "[Color]") {
+    Color color(0x00FF00);
+    REQUIRE(color.hexColorToString() == "0xFF00");
+}

@@ -7,8 +7,8 @@ TEST_CASE("Non-empty string, rgb ctor", "[RichLabel]") {
     RichLabel label("Design Patterns", color, font);
     
     REQUIRE(label.getText() == "Design Patterns");
-    REQUIRE(label.getColor() == 0xFF0000);
     REQUIRE(label.getFontInfo() == "Arial 12");
+    REQUIRE(label.getColorString() == "0xFF0000");
 }
 
 TEST_CASE("Non-empty string, hex ctor, implicit casting", "[RichLabel]") {
@@ -16,6 +16,6 @@ TEST_CASE("Non-empty string, hex ctor, implicit casting", "[RichLabel]") {
     RichLabel label("Design Patterns", 0x00FF00, font);
     
     REQUIRE(label.getText() == "Design Patterns");
-    REQUIRE(label.getColor() == 0x00FF00);
     REQUIRE(label.getFontInfo() == "Arial 12");
+    REQUIRE(label.getColorString() == "0xFF00");
 }
