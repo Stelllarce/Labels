@@ -10,7 +10,7 @@
 #include "transformations/NormalizeSpaceTransformation.hpp"
 #include "transformations/ReplaceTransformation.hpp"
 #include "transformations/DecorateTransformation.hpp"
-#include "services/LabelPrinter.hpp" // Include the LabelPrinter header
+#include "services/LabelPrinter.hpp"
 
 class TransformationTestFixture {
 protected:
@@ -59,7 +59,7 @@ TEST_CASE_METHOD(TransformationTestFixture, "Test Capitalization Transformation"
 
     setupRichLabel("designing a pattern");
     applyTransformation<CapitalizeTransformation>(richLabel);
-    REQUIRE(printLabel(richLabel) == "Here is a label: Designing a pattern\n");
+    REQUIRE(printLabel(richLabel) == "Here is a label: Designing a pattern Arial 12 0xFFFFFF\n");
 }
 
 TEST_CASE_METHOD(TransformationTestFixture, "Test Censor Transformation") {
@@ -69,7 +69,7 @@ TEST_CASE_METHOD(TransformationTestFixture, "Test Censor Transformation") {
 
     setupRichLabel("designing a pattern");
     applyCensorTransformation(richLabel, "e");
-    REQUIRE(printLabel(richLabel) == "Here is a label: d*signing a patt*rn\n");
+    REQUIRE(printLabel(richLabel) == "Here is a label: d*signing a patt*rn Arial 12 0xFFFFFF\n");
 }
 
 TEST_CASE_METHOD(TransformationTestFixture, "Test Left Trim Transformation") {
@@ -79,7 +79,7 @@ TEST_CASE_METHOD(TransformationTestFixture, "Test Left Trim Transformation") {
 
     setupRichLabel("   designing a pattern");
     applyTransformation<LeftTrimTransformation>(richLabel);
-    REQUIRE(printLabel(richLabel) == "Here is a label: designing a pattern\n");
+    REQUIRE(printLabel(richLabel) == "Here is a label: designing a pattern Arial 12 0xFFFFFF\n");
 }
 
 TEST_CASE_METHOD(TransformationTestFixture, "Test Right Trim Transformation") {
@@ -89,7 +89,7 @@ TEST_CASE_METHOD(TransformationTestFixture, "Test Right Trim Transformation") {
 
     setupRichLabel("designing a pattern   ");
     applyTransformation<RightTrimTransformation>(richLabel);
-    REQUIRE(printLabel(richLabel) == "Here is a label: designing a pattern\n");
+    REQUIRE(printLabel(richLabel) == "Here is a label: designing a pattern Arial 12 0xFFFFFF\n");
 }
 
 TEST_CASE_METHOD(TransformationTestFixture, "Test Normalize Space Transformation") {
@@ -99,7 +99,7 @@ TEST_CASE_METHOD(TransformationTestFixture, "Test Normalize Space Transformation
 
     setupRichLabel("designing             a  pattern");
     applyTransformation<NormalizeSpaceTransformation>(richLabel);
-    REQUIRE(printLabel(richLabel) == "Here is a label: designing a pattern\n");
+    REQUIRE(printLabel(richLabel) == "Here is a label: designing a pattern Arial 12 0xFFFFFF\n");
 }
 
 TEST_CASE_METHOD(TransformationTestFixture, "Test Replace Transformation") {
@@ -109,7 +109,7 @@ TEST_CASE_METHOD(TransformationTestFixture, "Test Replace Transformation") {
 
     setupRichLabel("designing a pattern");
     applyReplaceTransformation(richLabel, "atter", "la");
-    REQUIRE(printLabel(richLabel) == "Here is a label: designing a plan\n");
+    REQUIRE(printLabel(richLabel) == "Here is a label: designing a plan Arial 12 0xFFFFFF\n");
 }
 
 TEST_CASE_METHOD(TransformationTestFixture, "Test Decorate Transformation") {
@@ -119,5 +119,5 @@ TEST_CASE_METHOD(TransformationTestFixture, "Test Decorate Transformation") {
 
     setupRichLabel("very pretty text");
     applyTransformation<DecorateTransformation>(richLabel);
-    REQUIRE(printLabel(richLabel) == "Here is a label: -={ very pretty text }=-\n");
+    REQUIRE(printLabel(richLabel) == "Here is a label: -={ very pretty text }=- Arial 12 0xFFFFFF\n");
 }

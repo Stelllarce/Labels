@@ -5,3 +5,7 @@ LabelDecoratorBase::LabelDecoratorBase(std::shared_ptr<Label> label) : label(lab
 std::string LabelDecoratorBase::getText() const {
     return label->getText();
 }
+
+std::string LabelDecoratorBase::getDetails() const {
+    return label->getDetails();
+}

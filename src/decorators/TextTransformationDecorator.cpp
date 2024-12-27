@@ -6,3 +6,7 @@ TextTransformationDecorator::TextTransformationDecorator(std::shared_ptr<Label> 
 std::string TextTransformationDecorator::getText() const {
     return transformation->transform(LabelDecoratorBase::getText());
 }
+
+std::string TextTransformationDecorator::getDetails() const {
+    return LabelDecoratorBase::getDetails();
+}
