@@ -2,7 +2,7 @@
 
 RandomTransformationDecorator::RandomTransformationDecorator(
     std::shared_ptr<Label> label, 
-    const std::vector<std::unique_ptr<TextTransformation>>& transformations,
+    const std::vector<std::shared_ptr<TextTransformation>>& transformations,
     long seed)
     : LabelDecoratorBase(std::move(label)), 
     transformations(transformations),

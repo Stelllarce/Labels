@@ -20,7 +20,7 @@ SCENARIO("No transformations are given") {
             Font("Arial", 12)
         );
 
-        std::vector<std::unique_ptr<TextTransformation>> transformations;
+        std::vector<std::shared_ptr<TextTransformation>> transformations;
         WHEN("A RandomTransformationDecorator is applied") {
             THEN("The original text should undergo no changes") {
                 simple_label = std::make_shared<RandomTransformationDecorator>(
@@ -44,8 +44,8 @@ SCENARIO("Only one transformation is given inside the vector") {
             Font("Arial", 12)
         );
 
-        std::vector<std::unique_ptr<TextTransformation>> transformations;
-        transformations.push_back(std::make_unique<ReplaceTransformation>("bad", "abysmal"));
+        std::vector<std::shared_ptr<TextTransformation>> transformations;
+        transformations.push_back(std::make_shared<ReplaceTransformation>("bad", "abysmal"));
         WHEN("A RandomTransformationDecorator is applied with seed 1234") {
             simple_label = std::make_shared<RandomTransformationDecorator>(
                 std::move(simple_label), transformations, 1234);
@@ -80,14 +80,14 @@ SCENARIO("Applying random transformations on labels") {
             Font("Arial", 12)
         );
 
-        std::vector<std::unique_ptr<TextTransformation>> transformations;
-        transformations.push_back(std::make_unique<CapitalizeTransformation>());
-        transformations.push_back(std::make_unique<CensorTransformation>("crap"));
-        transformations.push_back(std::make_unique<LeftTrimTransformation>());
-        transformations.push_back(std::make_unique<RightTrimTransformation>());
-        transformations.push_back(std::make_unique<NormalizeSpaceTransformation>());
-        transformations.push_back(std::make_unique<ReplaceTransformation>("bad", "abysmal"));
-        transformations.push_back(std::make_unique<DecorateTransformation>());
+        std::vector<std::shared_ptr<TextTransformation>> transformations;
+        transformations.push_back(std::make_shared<CapitalizeTransformation>());
+        transformations.push_back(std::make_shared<CensorTransformation>("crap"));
+        transformations.push_back(std::make_shared<LeftTrimTransformation>());
+        transformations.push_back(std::make_shared<RightTrimTransformation>());
+        transformations.push_back(std::make_shared<NormalizeSpaceTransformation>());
+        transformations.push_back(std::make_shared<ReplaceTransformation>("bad", "abysmal"));
+        transformations.push_back(std::make_shared<DecorateTransformation>());
 
         WHEN("A RandomTransformationDecorator is applied with seed 1234, which seems to pick the TrimLeftTransformation") {
             simple_label = std::make_shared<RandomTransformationDecorator>(
