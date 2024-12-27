@@ -6,8 +6,12 @@ std::string RichLabel::getText() const {
     return SimpleLabel::getText();
 }
 
-uint32_t RichLabel::getColor() const {
-    return color.getColor();
+std::string RichLabel::getDetails() const {
+    return " " + getFontInfo() + " " + getColorString();
+}
+
+std::string RichLabel::getColorString() const {
+    return color.hexColorToString();
 }
 
 std::string RichLabel::getFontInfo() const {

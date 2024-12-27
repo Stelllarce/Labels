@@ -9,7 +9,8 @@ public:
     RichLabel(const std::string& value, const Color& color, const Font& font);
     std::string getText() const override;
     std::string getFontInfo() const;
-    uint32_t getColor() const;
+    std::string getColorString() const;
+    std::string getDetails() const override;
 private:
     Font font;
     Color color;    
