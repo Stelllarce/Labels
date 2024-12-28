@@ -17,7 +17,7 @@ target_sources(
     PRIVATE
         "label-tests/test-simple-label.cpp"
         "label-tests/test-rich-label.cpp"
-        # "service-tests/test-label-printer.cpp"
+        "service-tests/test-label-printer.cpp"
         "utils-tests/test-font.cpp"
         "utils-tests/test-color.cpp"
         "transformations-tests/test-capitalization.cpp"
@@ -27,7 +27,7 @@ target_sources(
         "transformations-tests/test-decorate.cpp"
         "transformations-tests/test-censor.cpp"
         "transformations-tests/test-replace.cpp"
-        # "decorators-tests/test-text-transformation-individual.cpp"
+        "decorators-tests/test-text-transformation-individual.cpp"
         "decorators-tests/test-text-transformation-stacked.cpp"
         "decorators-tests/test-random-transformation.cpp"
         "decorators-tests/test-cycling-transformation.cpp"
