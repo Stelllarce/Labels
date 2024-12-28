@@ -4,6 +4,10 @@
 #include "utils/Color.hpp"
 #include <cstdint>
 
+/**
+ * @class is an extention of the simple label
+ * adds color and font
+ */
 class RichLabel : public SimpleLabel {
 public:
     RichLabel(const std::string& value, const Color& color, const Font& font);

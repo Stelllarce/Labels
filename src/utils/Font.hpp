@@ -2,6 +2,9 @@
 #include <string>
 #include <stdexcept>
 
+/**
+ * @class represents a font with a name and size
+ */
 class Font {
 public:
     Font(const std::string& name, unsigned size);

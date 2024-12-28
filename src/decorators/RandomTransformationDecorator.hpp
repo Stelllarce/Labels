@@ -6,6 +6,10 @@
 #include <ctime>
 #include <iostream>
 
+/**
+ * @class decorator that applies a random transformation
+ * from a vector each time its invoked
+ */
 class RandomTransformationDecorator : public LabelDecoratorBase {
 public:
     RandomTransformationDecorator(std::shared_ptr<Label> label, const std::vector<std::shared_ptr<TextTransformation>>&  transformations, long seed = time(NULL));
@@ -13,5 +17,6 @@ public:
     std::string getDetails() const override;
 private:
     const std::vector<std::shared_ptr<TextTransformation>>& transformations;
+    // contains a seed field for testing
     long seed;
 };

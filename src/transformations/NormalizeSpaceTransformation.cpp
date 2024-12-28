@@ -1,5 +1,9 @@
 #include "NormalizeSpaceTransformation.hpp"
 
+/**
+ * @return text with all whitespace characters replaced with a single space
+ * @returns the text unmodified if text is empty
+ */
 std::string NormalizeSpaceTransformation::transform(const std::string& text) const {
     if (text.empty()) return text;
     

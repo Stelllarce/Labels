@@ -1,6 +1,10 @@
 #pragma once
 #include "TextTransformation.hpp"
 
+/**
+ * @class replaces every symbol in a
+ * string with '*'. the string to be replaced is passed inside the ctor
+ */
 class CensorTransformation : public TextTransformation {
 public:
     CensorTransformation(const std::string& to_censor);
