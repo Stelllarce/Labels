@@ -55,7 +55,12 @@ SCENARIO("Applying the CycleDecorator's transformations contigiously on a simple
 
                                         AND_THEN("THe text should be decorated") {
                                             REQUIRE(simple_label->getText() == "-={  this is a simple  label  }=-");
+                                        
+                                            AND_THEN("The cycle should start again with left trim") {
+                                                REQUIRE(simple_label->getText() == "this is a simple  label ");
+                                            }
                                         }
+
                                     }
                                 }
                             }
