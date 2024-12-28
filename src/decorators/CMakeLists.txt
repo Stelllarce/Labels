@@ -8,4 +8,5 @@ target_sources(
         "LabelDecoratorBase.cpp"
         "TextTransformationDecorator.cpp"
         "RandomTransformationDecorator.cpp"
+        "CyclingTransformationsDecorator.cpp"
 )
