@@ -19,6 +19,7 @@ RandomTransformationDecorator::RandomTransformationDecorator(
  * @return the decorated string
  */
 std::string RandomTransformationDecorator::getText() const {
+    if (!label) return "";
     if (transformations.empty()) return LabelDecoratorBase::label->getText();
     std::srand(seed);
     size_t random_index = std::rand() % transformations.size();

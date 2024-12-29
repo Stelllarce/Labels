@@ -6,6 +6,7 @@ LabelDecoratorBase::LabelDecoratorBase(std::shared_ptr<Label> label) : label(lab
  * @return the text of the label
  */
 std::string LabelDecoratorBase::getText() const {
+    if (!label) return "";
     return label->getText();
 }
 

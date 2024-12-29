@@ -13,6 +13,7 @@ CyclingTransformationsDecorator::CyclingTransformationsDecorator(std::shared_ptr
  * transformation, it starts from the beginning
  */
 std::string CyclingTransformationsDecorator::getText() const {
+    if (!label) return "";
     return transformations[index++ % transformations.size()]->transform(LabelDecoratorBase::label->getText());
 }
 
