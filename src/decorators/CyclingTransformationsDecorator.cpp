@@ -20,3 +20,12 @@ std::string CyclingTransformationsDecorator::getText() const {
 std::string CyclingTransformationsDecorator::getDetails() const{
     return LabelDecoratorBase::label->getDetails();
 }
+
+bool CyclingTransformationsDecorator::operator==(const LabelDecoratorBase& other) const {
+    if (const CyclingTransformationsDecorator* derived = dynamic_cast<const CyclingTransformationsDecorator*>(&other)) {
+        for (size_t i = 0; i < transformations.size(); i++) {
+            if (!(*(transformations[i]) == *(derived->transformations[i]))) return false;
+        }
+    }
+    return true;
+}

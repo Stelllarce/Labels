@@ -12,9 +12,10 @@
  */
 class RandomTransformationDecorator : public LabelDecoratorBase {
 public:
-    RandomTransformationDecorator(std::shared_ptr<Label> label, const std::vector<std::shared_ptr<TextTransformation>>&  transformations, long seed = time(NULL));
+    explicit RandomTransformationDecorator(std::shared_ptr<Label> label, const std::vector<std::shared_ptr<TextTransformation>>&  transformations, long seed = time(NULL));
     std::string getText() const override;
     std::string getDetails() const override;
+    bool operator==(const LabelDecoratorBase& other) const override;
 private:
     const std::vector<std::shared_ptr<TextTransformation>>& transformations;
     // contains a seed field for testing

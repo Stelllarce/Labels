@@ -29,3 +29,12 @@ std::string RandomTransformationDecorator::getText() const {
 std::string RandomTransformationDecorator::getDetails() const {
     return LabelDecoratorBase::label->getDetails();
 }
+
+bool RandomTransformationDecorator::operator==(const LabelDecoratorBase& other) const {
+    if (const RandomTransformationDecorator* derived = dynamic_cast<const RandomTransformationDecorator*>(&other)) {
+        for (size_t i = 0; i < transformations.size(); i++) {
+            if (!(*(transformations[i]) == *(derived->transformations[i]))) return false;
+        }
+    }
+    return true;
+}

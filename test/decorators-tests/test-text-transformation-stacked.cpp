@@ -73,6 +73,28 @@ SCENARIO("Applying sequential transformations on labels using TransformationDeco
                                 REQUIRE(simple_label->getText() == "-={ This label describes a design pattern! }=-");
                                 REQUIRE(rich_label->getText() == "-={ This is another label, that uses a rich font! }=-");
                             }
+                            AND_WHEN("A CensorTransformation is applied") {
+                                simple_label = std::make_shared<TextTransformationDecorator>(
+                                    std::move(simple_label), std::make_unique<CensorTransformation>("label"));
+                                rich_label = std::make_shared<TextTransformationDecorator>(
+                                    std::move(rich_label), std::make_unique<CensorTransformation>("is"));
+
+                                THEN("The text should be censored") {
+                                    REQUIRE(simple_label->getText() == "-={ This ***** describes a design pattern! }=-");
+                                    REQUIRE(rich_label->getText() == "-={ Th** ** another label, that uses a rich font! }=-");
+                                }
+                                AND_WHEN("A ReplaceTransformation is applied") {
+                                    simple_label = std::make_shared<TextTransformationDecorator>(
+                                        std::move(simple_label), std::make_unique<ReplaceTransformation>(" ", "_"));
+                                    rich_label = std::make_shared<TextTransformationDecorator>(
+                                        std::move(rich_label), std::make_unique<ReplaceTransformation>(" ", "_"));
+
+                                    THEN("Spaces should be replaced with underscores") {
+                                        REQUIRE(simple_label->getText() == "-={_This_*****_describes_a_design_pattern!_}=-");
+                                        REQUIRE(rich_label->getText() == "-={_Th**_**_another_label,_that_uses_a_rich_font!_}=-");
+                                    }
+                                }
+                            }
                         }
                     }
                 }

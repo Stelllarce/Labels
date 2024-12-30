@@ -11,6 +11,7 @@ public:
     explicit TextTransformationDecorator(std::shared_ptr<Label> label, std::unique_ptr<TextTransformation> transformation);
     std::string getText() const override;
     std::string getDetails() const override;
+    bool operator==(const LabelDecoratorBase& other) const override;
 private:
     std::unique_ptr<TextTransformation> transformation;
 };

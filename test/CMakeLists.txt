@@ -27,10 +27,13 @@ target_sources(
         "transformations-tests/test-decorate.cpp"
         "transformations-tests/test-censor.cpp"
         "transformations-tests/test-replace.cpp"
+        "transformations-tests/test-operator-equals.cpp"
         "decorators-tests/test-text-transformation-individual.cpp"
         "decorators-tests/test-text-transformation-stacked.cpp"
         "decorators-tests/test-random-transformation.cpp"
         "decorators-tests/test-cycling-transformation.cpp"
+        "decorators-tests/test-operator-equals.cpp"
+        "decorators-tests/test-decorator-removal.cpp"
 )
 
 # Automatically register all tests
