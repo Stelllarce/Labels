@@ -12,4 +12,5 @@ target_sources(
         "DecorateTransformation.cpp"
         "CensorTransformation.cpp"
         "ReplaceTransformation.cpp"
+        "CompositeTransformation.cpp"
 )

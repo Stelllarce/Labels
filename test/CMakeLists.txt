@@ -28,6 +28,7 @@ target_sources(
         "transformations-tests/test-censor.cpp"
         "transformations-tests/test-replace.cpp"
         "transformations-tests/test-operator-equals.cpp"
+        "transformations-tests/test-composite.cpp"
         "decorators-tests/test-text-transformation-individual.cpp"
         "decorators-tests/test-text-transformation-stacked.cpp"
         "decorators-tests/test-random-transformation.cpp"
