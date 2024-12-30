@@ -28,7 +28,7 @@ std::string LabelDecoratorBase::getDetails() const {
  * @param to_rm the decorator to remove as an r-value
  */
 std::shared_ptr<Label> LabelDecoratorBase::removeDecoratorFrom(std::shared_ptr<Label>& l, std::shared_ptr<LabelDecoratorBase>&& to_rm) {
-    if (!to_rm) return l;
+    if (to_rm == nullptr) return l;
 
     std::shared_ptr<LabelDecoratorBase> prev = nullptr;
     // start with the first element in the list, being the last applied decoration
