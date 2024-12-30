@@ -16,8 +16,8 @@ SCENARIO("No transformations are given") {
         std::shared_ptr<Label> simple_label = std::make_shared<SimpleLabel>(" crap! This is  very bad! ");
         std::shared_ptr<Label> rich_label = std::make_shared<RichLabel>(
             " you   bad boy! Don't crap   on the  carpet!  ",
-            Color(0x00FF00),
-            Font("Arial", 12)
+            std::make_unique<HexColor>(0x00FF00),
+            std::make_unique<StyledFont>("Arial", 12)
         );
 
         std::vector<std::shared_ptr<TextTransformation>> transformations;
@@ -40,8 +40,8 @@ SCENARIO("Only one transformation is given inside the vector") {
         std::shared_ptr<Label> simple_label = std::make_shared<SimpleLabel>(" crap! This is  very bad! ");
         std::shared_ptr<Label> rich_label = std::make_shared<RichLabel>(
             " you   bad boy! Don't crap   on the  carpet!  ",
-            Color(0x00FF00),
-            Font("Arial", 12)
+            std::make_unique<HexColor>(0x00FF00),
+            std::make_unique<StyledFont>("Arial", 12)
         );
 
         std::vector<std::shared_ptr<TextTransformation>> transformations;
@@ -76,8 +76,8 @@ SCENARIO("Applying random transformations on labels") {
         std::shared_ptr<Label> simple_label = std::make_shared<SimpleLabel>(" crap! This is  very bad! ");
         std::shared_ptr<Label> rich_label = std::make_shared<RichLabel>(
             " you   bad boy! Don't crap   on the  carpet!  ",
-            Color(0x00FF00),
-            Font("Arial", 12)
+            std::make_unique<HexColor>(0x00FF00),
+            std::make_unique<StyledFont>("Arial", 12)
         );
 
         std::vector<std::shared_ptr<TextTransformation>> transformations;

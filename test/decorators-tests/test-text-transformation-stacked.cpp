@@ -16,8 +16,8 @@ SCENARIO("Applying sequential transformations on labels using TransformationDeco
         std::shared_ptr<Label> simple_label = std::make_shared<SimpleLabel>(" this label     describes  a    design pattern!  ");
         std::shared_ptr<Label> rich_label = std::make_shared<RichLabel>(
             "   this is  another      label, that uses  a rich  font! ",
-            Color(0x00FF00), 
-            Font("Arial", 12)
+            std::make_unique<HexColor>(0x00FF00),
+            std::make_unique<StyledFont>("Arial", 12)
         );
 
         WHEN("A LeftTrimTransformation is applied") {

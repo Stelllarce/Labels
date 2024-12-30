@@ -2,9 +2,9 @@
 #include "labels/RichLabel.hpp"
 
 TEST_CASE("Non-empty string, rgb ctor", "[RichLabel]") {
-    Font font("Arial", 12);
-    Color color(255, 0, 0);
-    RichLabel label("Design Patterns", color, font);
+    std::unique_ptr<Color> color = std::make_unique<HexColor>(0xFF0000);
+    std::unique_ptr<Font> font = std::make_unique<StyledFont>("Arial", 12);
+    RichLabel label("Design Patterns", std::move(color), std::move(font));
     
     REQUIRE(label.getText() == "Design Patterns");
     REQUIRE(label.getFontInfo() == "Arial 12");
@@ -12,8 +12,10 @@ TEST_CASE("Non-empty string, rgb ctor", "[RichLabel]") {
 }
 
 TEST_CASE("Non-empty string, hex ctor, implicit casting", "[RichLabel]") {
-    Font font("Arial", 12);
-    RichLabel label("Design Patterns", 0x00FF00, font);
+    std::unique_ptr<Color> color = std::make_unique<HexColor>(0xFF00);
+    std::unique_ptr<Font> font = std::make_unique<StyledFont>("Arial", 12);
+
+    RichLabel label("Design Patterns", std::move(color), std::move(font));
     
     REQUIRE(label.getText() == "Design Patterns");
     REQUIRE(label.getFontInfo() == "Arial 12");

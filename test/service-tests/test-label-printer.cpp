@@ -32,7 +32,7 @@ TEST_CASE("Print a SimpleLabel", "[LabelPrinter]") {
 TEST_CASE("Print a RichLabel", "[LabelPrinter]") {
     std::ostringstream output;
     LabelPrinter labelPrinter;
-    RichLabel label("Design Patterns", Color(0xFF0000), Font("Arial", 12));
+    RichLabel label("Design Patterns", std::make_unique<HexColor>(0xFF0000), std::make_unique<StyledFont>("Arial", 12));
     labelPrinter.print(label, output);
     REQUIRE(output.str() == "Here is a label: Design Patterns Arial 12 0xFF0000\n");
 }

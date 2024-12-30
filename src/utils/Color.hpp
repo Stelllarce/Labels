@@ -1,19 +1,11 @@
 #pragma once
-#include <cstdint>
 #include <string>
-#include <sstream>
 
 /**
- * @class represents a color in RGB format
+ * @interface represents a color
  */
 class Color {
 public:
-    Color(uint8_t r, uint8_t g, uint8_t b);
-    Color(uint32_t hex_color);
-    uint32_t getColor() const;
-    std::string hexColorToString() const;
-
-    static constexpr unsigned MAX_COLOR = 0xFFFFFF;
-private:
-    uint32_t color;
+    virtual std::string getColor() const = 0;
+    virtual ~Color() = default;
 };

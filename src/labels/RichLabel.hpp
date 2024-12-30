@@ -1,8 +1,9 @@
 #pragma once
 #include "SimpleLabel.hpp"
-#include "utils/Font.hpp"
-#include "utils/Color.hpp"
+#include "utils/HexColor.hpp"
+#include "utils/StyledFont.hpp"
 #include <cstdint>
+#include <memory>
 
 /**
  * @class is an extention of the simple label
@@ -10,14 +11,12 @@
  */
 class RichLabel : public SimpleLabel {
 public:
-    RichLabel(const std::string& value, const Color& color, const Font& font);
+    RichLabel(const std::string& value, std::unique_ptr<Color> color, std::unique_ptr<Font> font);
     std::string getText() const override;
     std::string getFontInfo() const;
     std::string getColorString() const;
     std::string getDetails() const override;
 private:
-    Font font;
-    Color color;    
-    
-    static constexpr unsigned MAX_COLOR = 0xFFFFFF;
+    std::unique_ptr<Font> font;
+    std::unique_ptr<Color> color;    
 };

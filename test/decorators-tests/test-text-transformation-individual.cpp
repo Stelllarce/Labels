@@ -22,7 +22,7 @@ protected:
     }
 
     void setupRichLabel(const std::string& text) {
-        richLabel = std::make_unique<RichLabel>(text, Color(0xFFFFFF), Font("Arial", 12));
+        richLabel = std::make_unique<RichLabel>(text, std::make_unique<HexColor>(0xFFFFFF), std::make_unique<StyledFont>("Arial", 12));
     }
 
     template <typename Transformation>
