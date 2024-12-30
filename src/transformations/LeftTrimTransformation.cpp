@@ -11,3 +11,7 @@ std::string LeftTrimTransformation::transform(const std::string& text) const {
     while (std::isspace(text[start]) && start++ < text.size());
     return text.substr(start);
 }
+
+bool LeftTrimTransformation::operator==(const TextTransformation& other) const {
+    return dynamic_cast<const LeftTrimTransformation*>(&other) != nullptr;
+}

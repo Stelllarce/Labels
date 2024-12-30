@@ -26,3 +26,10 @@ std::string ReplaceTransformation::transform(const std::string& text) const {
     }
     return modified;
 }
+
+bool ReplaceTransformation::operator==(const TextTransformation& other) const {
+    if (const ReplaceTransformation* derived = dynamic_cast<const ReplaceTransformation*>(&other)) {
+        return derived->to_replace == to_replace && derived->replacement == replacement;
+    }
+    return false;
+}

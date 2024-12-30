@@ -11,3 +11,7 @@ std::string CapitalizeTransformation::transform(const std::string& text) const {
     }
     return modified;
 }
+
+bool CapitalizeTransformation::operator==(const TextTransformation& other) const {
+    return dynamic_cast<const CapitalizeTransformation*>(&other) != nullptr;
+}

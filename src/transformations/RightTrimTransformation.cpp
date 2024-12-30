@@ -13,3 +13,7 @@ std::string RightTrimTransformation::transform(const std::string& text) const {
     }
     return modified;
 }
+
+bool RightTrimTransformation::operator==(const TextTransformation& other) const {
+    return dynamic_cast<const RightTrimTransformation*>(&other) != nullptr;
+}

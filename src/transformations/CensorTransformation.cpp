@@ -24,3 +24,10 @@ std::string CensorTransformation::transform(const std::string& text) const {
     }
     return modified;
 }
+
+bool CensorTransformation::operator==(const TextTransformation& other) const {
+    if (const CensorTransformation* derived = dynamic_cast<const CensorTransformation*>(&other)) {
+        return derived->to_censor == to_censor;
+    }
+    return false;
+}
