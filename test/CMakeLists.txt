@@ -17,6 +17,7 @@ target_sources(
     PRIVATE
         "label-tests/test-simple-label.cpp"
         "label-tests/test-rich-label.cpp"
+        "label-tests/test-custom-label.cpp"
         "service-tests/test-label-printer.cpp"
         "utils-tests/test-font.cpp"
         "utils-tests/test-color.cpp"

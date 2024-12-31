@@ -7,4 +7,5 @@ target_sources(
     PRIVATE
         "SimpleLabel.cpp"
         "RichLabel.cpp"
+        "CustomLabel.cpp"
 )
