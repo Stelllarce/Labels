@@ -21,9 +21,9 @@ private:
     // when requests become or or equal to timeout, user is prompted to change label text
     static constexpr size_t TIMEOUT = 4;
 
+    std::istream& is = std::cin;
 #define UNIT_TESTING
 #ifdef UNIT_TESTING
-    std::istream& is = std::cin;
 public:
     CustomLabel(std::istream& is) : is(is) {}
 #endif // UNIT_TESTING

@@ -6,7 +6,9 @@
 std::shared_ptr<SimpleLabel> CustomLabel::getLabel() const {
     if(label == nullptr) {
         std::string text;
+        #ifndef UNIT_TESTING
         std::cout << "Enter text of custom lbl: ";
+        #endif
         std::getline(is, text);
         label = std::make_shared<SimpleLabel>(text);
     }
@@ -36,7 +38,9 @@ std::string CustomLabel::getDetails() const {
  * if 'y' has been inputted then nullify label ptr and set requests back to 0
  */
 void CustomLabel::promptChange() const {
+#ifndef UNIT_TESTING
     std::cout << "Enter new text? [y|n]: ";
+#endif 
     char answer;
     is.get(answer);
     is.ignore(); // ignore newline
