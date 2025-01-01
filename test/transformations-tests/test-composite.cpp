@@ -28,3 +28,31 @@ TEST_CASE("Apply multiple transformations", "[CompositeTransformation]") {
         };
     REQUIRE(transformations.transform("why that  is simply an    example!") == "-={ L***, **** is simply an example! }=-");
 }
+
+TEST_CASE("Adding a transformation", "[CompositeTransformation]") {
+    CompositeTransformation transformations = {
+        std::make_shared<ReplaceTransformation>("that", "this"),
+        std::make_shared<CensorTransformation>("this"),
+        std::make_shared<ReplaceTransformation>("why", "look, "),
+        std::make_shared<CensorTransformation>("ook"),
+        std::make_shared<CapitalizeTransformation>(),
+        std::make_shared<NormalizeSpaceTransformation>(), 
+        std::make_shared<DecorateTransformation>()
+        };
+    transformations.add(std::make_shared<ReplaceTransformation>("simply", "just"));
+    REQUIRE(transformations.transform("why that  is simply an    example!") == "-={ L***, **** is just an example! }=-");
+}
+
+TEST_CASE("Removing a transformation", "[CompositeTransformation]") {
+    CompositeTransformation transformations = {
+        std::make_shared<ReplaceTransformation>("that", "this"),
+        std::make_shared<CensorTransformation>("this"),
+        std::make_shared<ReplaceTransformation>("why", "look, "),
+        std::make_shared<CensorTransformation>("ook"),
+        std::make_shared<CapitalizeTransformation>(),
+        std::make_shared<NormalizeSpaceTransformation>(), 
+        std::make_shared<DecorateTransformation>()
+        };
+    transformations.remove(std::make_shared<CensorTransformation>("this"));
+    REQUIRE(transformations.transform("why that  is simply an    example!") == "-={ L***, this is simply an example! }=-");
+}

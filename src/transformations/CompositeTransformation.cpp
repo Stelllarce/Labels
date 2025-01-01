@@ -25,3 +25,16 @@ bool CompositeTransformation::operator==(const TextTransformation& other) const 
     }
     return true;
 }
+
+void CompositeTransformation::add(const std::shared_ptr<TextTransformation>& transformation) {
+    transformations.push_back(transformation);
+}
+
+void CompositeTransformation::remove(const std::shared_ptr<TextTransformation>& transformation) {
+    for (auto it = transformations.begin(); it != transformations.end(); ++it) {
+        if (*transformation == **it) {
+            transformations.erase(it);
+            return;
+        }
+    }
+}
