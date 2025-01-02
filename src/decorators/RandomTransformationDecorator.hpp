@@ -17,7 +17,7 @@ public:
     std::string getDetails() const override;
     bool operator==(const LabelDecoratorBase& other) const override;
 private:
-    const std::vector<std::shared_ptr<TextTransformation>>& transformations;
+    std::vector<std::shared_ptr<TextTransformation>> transformations;
     // contains a seed field for testing
     long seed;
 };
