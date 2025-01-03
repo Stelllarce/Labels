@@ -9,6 +9,7 @@ class StyledFont : public Font {
 public:
     StyledFont(const std::string& name, unsigned size);
     std::string getName() const override;
+    std::string getComplicationInformation() const override;
     unsigned getSize() const;
 private:
     unsigned size;
