@@ -50,3 +50,11 @@ SCENARIO("Making 4 requests and declining change", "[CustomLabel]") {
         }
     }
 }
+
+TEST_CASE("Add help text to custom label", "[CustomLabel]") {
+    std::istringstream is("initial custom label text\n"
+                            "y\n"
+                            "new custom label text\n");
+    CustomLabel label(is, std::make_unique<HelpText>("This is a custom label that can be changed after 4 requests."));
+    REQUIRE(label.getHelpText() == "This is a custom label that can be changed after 4 requests.");
+}
