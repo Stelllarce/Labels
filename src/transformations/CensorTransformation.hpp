@@ -9,6 +9,7 @@ class CensorTransformation : public TextTransformation {
 public:
     CensorTransformation(const std::string& to_censor);
     std::string transform(const std::string& text) const override;
+    std::string getCensorWord() const;
     bool operator==(const TextTransformation& other) const override;
 private:
     std::string to_censor;

@@ -31,3 +31,7 @@ bool CensorTransformation::operator==(const TextTransformation& other) const {
     }
     return false;
 }
+
+std::string CensorTransformation::getCensorWord() const {
+    return to_censor;
+}
