@@ -1,5 +1,8 @@
 #pragma once
 #include <string>
+#include <memory>
+
+class HelpLabel;
 
 /**
  * @interface for all labels
@@ -18,4 +21,10 @@ public:
      */
     virtual std::string getDetails() const = 0;
     virtual ~Label() = default;
+protected:
+    Label() = default;
+    Label(std::unique_ptr<HelpLabel> help_label) : help_label(std::move(help_label)) {}
+    HelpLabel* getHelpLabel() const { return help_label.get(); }
+private:
+    std::unique_ptr<HelpLabel> help_label;
 };

@@ -7,5 +7,6 @@ const std::string LABEL_PREFIX = "Here is a label: ";
 
 class LabelPrinter {
 public:
-    void print(const Label& label, std::ostream& output = std::cout) const;
+    static void print(const Label& label, std::ostream& output = std::cout);
+    static void printWithHelpText(const HelpLabel label, std::ostream& output = std::cout);
 };
