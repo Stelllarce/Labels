@@ -12,3 +12,8 @@ TEST_CASE("General tests", "[SimpleLabel]") {
 		REQUIRE(label.getText() == "");
 	}
 }
+
+TEST_CASE("Add help text to simple label", "[SimpleLabel]") {
+	SimpleLabel label("Design Patterns", std::make_unique<HelpText>("This is a simple label."));
+	REQUIRE(label.getHelpText() == "This is a simple label.");
+}

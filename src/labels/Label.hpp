@@ -1,8 +1,7 @@
 #pragma once
+#include "utils/Complication.hpp"
 #include <string>
 #include <memory>
-
-class HelpLabel;
 
 /**
  * @interface for all labels
@@ -20,11 +19,12 @@ public:
      * added so labels can be distinguished from each other
      */
     virtual std::string getDetails() const = 0;
+    virtual std::string getHelpText() const { return ""; };
     virtual ~Label() = default;
 protected:
-    Label() = default;
-    Label(std::unique_ptr<HelpLabel> help_label) : help_label(std::move(help_label)) {}
-    HelpLabel* getHelpLabel() const { return help_label.get(); }
-private:
-    std::unique_ptr<HelpLabel> help_label;
+    Label(std::unique_ptr<Complication> complication) : complication(std::move(complication)) {};
+    Label() {};
+    Complication* getComplication() const { return complication.get(); }; 
+public:
+    std::unique_ptr<Complication> complication;
 };

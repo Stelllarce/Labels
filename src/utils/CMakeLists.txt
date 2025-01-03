@@ -7,4 +7,5 @@ target_sources(
     PRIVATE
         "HexColor.cpp"
         "StyledFont.cpp"
+        "HelpText.cpp"
 )

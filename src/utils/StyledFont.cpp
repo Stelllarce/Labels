@@ -26,3 +26,10 @@ std::string StyledFont::getName() const {
 unsigned StyledFont::getSize() const {
     return size;
 }
+
+/**
+ * @return the font's name and size
+ */
+std::string StyledFont::getComplicationInformation() const {
+    return name + " " + std::to_string(size);
+}

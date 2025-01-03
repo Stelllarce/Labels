@@ -1,11 +1,13 @@
 #pragma once
 #include <string>
+#include "Complication.hpp"
 
 /**
  * @interface represents a color
  */
-class Color {
+class Color : public Complication {
 public:
-    virtual std::string getColor() const = 0;
     virtual ~Color() = default;
+protected:
+    virtual std::string getColor() const = 0;
 };

@@ -1,5 +1,11 @@
 #include "RichLabel.hpp"
 
+RichLabel::RichLabel(const std::string& value, 
+    std::unique_ptr<Color> color, 
+    std::unique_ptr<Font> font, 
+    std::unique_ptr<HelpText> complication) :
+    SimpleLabel(value, std::move(complication)), color(std::move(color)), font(std::move(font)) {}
+
 RichLabel::RichLabel(const std::string& value, std::unique_ptr<Color> color, std::unique_ptr<Font> font) : SimpleLabel(value), color(std::move(color)), font(std::move(font)) {}
 
 /**
@@ -20,12 +26,16 @@ std::string RichLabel::getDetails() const {
  * @return color hex as string
  */
 std::string RichLabel::getColorString() const {
-    return color->getColor();
+    return color->getComplicationInformation();
 }
 
 /**
  * @return name and size of font
  */
 std::string RichLabel::getFontInfo() const {
-    return font->getName() + " " + std::to_string(font->getSize());
+    return font->getComplicationInformation();
+}
+
+std::string RichLabel::getHelpText() const {
+    return getComplication()->getComplicationInformation();
 }

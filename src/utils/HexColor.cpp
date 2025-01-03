@@ -27,3 +27,10 @@ std::string HexColor::getColor() const {
     ss << "0x" << std::hex << std::uppercase << color;
     return ss.str();
 }
+
+/**
+ * @return the color in hex format
+ */
+std::string HexColor::getComplicationInformation() const {
+    return getColor();
+}
