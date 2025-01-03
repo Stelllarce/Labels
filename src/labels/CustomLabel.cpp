@@ -1,5 +1,8 @@
 #include "CustomLabel.hpp"
 
+CustomLabel::CustomLabel(std::unique_ptr<HelpText> complication) : Label(std::move(complication)) {}
+
+
 /**
  * @brief initializes label if its empty by giving it a text through an input stream
  */
@@ -50,4 +53,8 @@ void CustomLabel::promptChange() const {
         label = nullptr;
         requests = 0;
     }
+}
+
+std::string CustomLabel::getHelpText() const {
+    return getComplication()->getComplicationInformation();
 }
