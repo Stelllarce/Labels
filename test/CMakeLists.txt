@@ -19,6 +19,7 @@ target_sources(
         "label-tests/test-rich-label.cpp"
         "label-tests/test-custom-label.cpp"
         "service-tests/test-label-printer.cpp"
+        "service-tests/test-censor-factory.cpp"
         "utils-tests/test-font.cpp"
         "utils-tests/test-color.cpp"
         "transformations-tests/test-capitalization.cpp"
