@@ -17,3 +17,7 @@ std::string RightTrimTransformation::transform(const std::string& text) const {
 bool RightTrimTransformation::operator==(const TextTransformation& other) const {
     return dynamic_cast<const RightTrimTransformation*>(&other) != nullptr;
 }
+
+std::unique_ptr<TextTransformation> RightTrimTransformation::clone() const {
+    return std::make_unique<RightTrimTransformation>(*this);
+}

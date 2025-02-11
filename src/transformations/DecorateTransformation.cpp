@@ -12,3 +12,7 @@ std::string DecorateTransformation::transform(const std::string& text) const {
 bool DecorateTransformation::operator==(const TextTransformation& other) const {
     return dynamic_cast<const DecorateTransformation*>(&other) != nullptr;
 }
+
+std::unique_ptr<TextTransformation> DecorateTransformation::clone() const {
+    return std::make_unique<DecorateTransformation>(*this);
+}

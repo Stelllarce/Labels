@@ -38,3 +38,11 @@ void CompositeTransformation::remove(const std::shared_ptr<TextTransformation>& 
         }
     }
 }
+
+std::unique_ptr<TextTransformation> CompositeTransformation::clone() const {
+    std::vector<std::shared_ptr<TextTransformation>> cloned_transformations;
+    for (const auto& transformation : transformations) {
+        cloned_transformations.push_back(transformation->clone());
+    }
+    return std::make_unique<CompositeTransformation>(cloned_transformations);
+}

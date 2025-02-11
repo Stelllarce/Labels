@@ -35,3 +35,7 @@ bool CensorTransformation::operator==(const TextTransformation& other) const {
 std::string CensorTransformation::getCensorWord() const {
     return to_censor;
 }
+
+std::unique_ptr<TextTransformation> CensorTransformation::clone() const {
+    return std::make_unique<CensorTransformation>(*this);
+}

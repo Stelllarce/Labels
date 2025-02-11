@@ -27,3 +27,7 @@ std::string NormalizeSpaceTransformation::transform(const std::string& text) con
 bool NormalizeSpaceTransformation::operator==(const TextTransformation& other) const {
     return dynamic_cast<const NormalizeSpaceTransformation*>(&other) != nullptr;
 }
+
+std::unique_ptr<TextTransformation> NormalizeSpaceTransformation::clone() const {
+    return std::make_unique<NormalizeSpaceTransformation>(*this);
+}

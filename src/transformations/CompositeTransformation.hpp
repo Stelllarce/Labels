@@ -6,12 +6,15 @@
 
 class CompositeTransformation : public TextTransformation {
 public:
+    CompositeTransformation() = default;
     CompositeTransformation(std::initializer_list<std::shared_ptr<TextTransformation>> transformations);
     std::string transform(const std::string& text) const override;
     bool operator==(const TextTransformation& other) const override;
 
     void add(const std::shared_ptr<TextTransformation>& transformation) override;
     void remove(const std::shared_ptr<TextTransformation>& transformation) override;
+
+    std::unique_ptr<TextTransformation> clone() const override;
 private:
     std::vector<std::shared_ptr<TextTransformation>> transformations;
 };

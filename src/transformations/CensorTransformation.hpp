@@ -11,6 +11,7 @@ public:
     std::string transform(const std::string& text) const override;
     std::string getCensorWord() const;
     bool operator==(const TextTransformation& other) const override;
+    std::unique_ptr<TextTransformation> clone() const override;
 private:
     std::string to_censor;
 };

@@ -33,3 +33,7 @@ bool ReplaceTransformation::operator==(const TextTransformation& other) const {
     }
     return false;
 }
+
+std::unique_ptr<TextTransformation> ReplaceTransformation::clone() const {
+    return std::make_unique<ReplaceTransformation>(*this);
+}

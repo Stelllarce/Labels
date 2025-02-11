@@ -17,5 +17,7 @@ public:
     virtual void remove(const std::shared_ptr<TextTransformation>& transformation) {
         return;
     }
+
+    virtual std::unique_ptr<TextTransformation> clone() const = 0;
     virtual ~TextTransformation() = default;
 };

@@ -15,3 +15,7 @@ std::string CapitalizeTransformation::transform(const std::string& text) const {
 bool CapitalizeTransformation::operator==(const TextTransformation& other) const {
     return dynamic_cast<const CapitalizeTransformation*>(&other) != nullptr;
 }
+
+std::unique_ptr<TextTransformation> CapitalizeTransformation::clone() const {
+    return std::make_unique<CapitalizeTransformation>(*this);
+}

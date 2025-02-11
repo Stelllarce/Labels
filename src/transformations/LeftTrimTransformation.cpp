@@ -15,3 +15,7 @@ std::string LeftTrimTransformation::transform(const std::string& text) const {
 bool LeftTrimTransformation::operator==(const TextTransformation& other) const {
     return dynamic_cast<const LeftTrimTransformation*>(&other) != nullptr;
 }
+
+std::unique_ptr<TextTransformation> LeftTrimTransformation::clone() const {
+    return std::make_unique<LeftTrimTransformation>(*this);
+}
