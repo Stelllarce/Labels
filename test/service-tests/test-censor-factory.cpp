@@ -138,7 +138,7 @@ SCENARIO("Testing empty and whitespace words") {
             auto trans_space = factory.createCensorTransformation(" ");
             
             std::unique_ptr<Label> label1 = std::make_unique<SimpleLabel>("test test");
-            std::unique_ptr<Label> label2 = std::make_unique<SimpleLabel>("test*test");
+            std::unique_ptr<Label> label2 = std::make_unique<SimpleLabel>("test test");
             
             label1 = std::make_unique<TextTransformationDecorator>(
                 std::move(label1), 
@@ -151,7 +151,7 @@ SCENARIO("Testing empty and whitespace words") {
 
             THEN("The text should remain unchanged") {
                 REQUIRE(label1->getText() == "test test");
-                REQUIRE(label2->getText() == "test test");
+                REQUIRE(label2->getText() == "test*test");
             }
         }
     }

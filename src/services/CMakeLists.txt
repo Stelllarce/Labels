@@ -7,4 +7,7 @@ target_sources(
     PRIVATE
         "LabelPrinter.cpp"
         "CensorTransformationFactory.cpp"
+        "LabelFactory.cpp"
+        "TransformationFactory.cpp"
+        "DecoratorFactory.cpp"
 )
