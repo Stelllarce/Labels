@@ -10,7 +10,7 @@
 class CustomLabel : public Label {
 public:
     CustomLabel(std::istream& is) : is(is) {}
-    CustomLabel(std::unique_ptr<Complication> complication);
+    explicit CustomLabel(std::unique_ptr<HelpText> complication);
     std::string getText() const override;
     std::string getDetails() const override;
     std::string getHelpText() const override;
@@ -29,9 +29,6 @@ private:
 #define UNIT_TESTING
 #ifdef UNIT_TESTING
 public:
-    CustomLabel(std::istream& is, std::unique_ptr<Complication> help_text) : is(is), Label(std::move(help_text)) {
-        if (!dynamic_cast<HelpText*>(this->getComplication()))
-            throw std::invalid_argument("Complication type should be HelpText");
-    }
+    CustomLabel(std::istream& is, std::unique_ptr<HelpText> help_text) : is(is), Label(std::move(help_text)) {}
 #endif // UNIT_TESTING
 };

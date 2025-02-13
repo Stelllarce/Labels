@@ -1,9 +1,6 @@
 #include "CustomLabel.hpp"
 
-CustomLabel::CustomLabel(std::unique_ptr<Complication> complication) : Label(std::move(complication)) {
-    if (!dynamic_cast<HelpText*>(this->getComplication()))
-        throw std::invalid_argument("Complication type should be HelpText");
-}
+CustomLabel::CustomLabel(std::unique_ptr<HelpText> complication) : Label(std::move(complication)) {}
 
 
 /**
