@@ -11,10 +11,10 @@ public:
     virtual std::string transform(const std::string& text) const = 0;
     virtual bool operator==(const TextTransformation& other) const = 0;
 
-    virtual void add(const std::shared_ptr<TextTransformation>& transformation) {
+    virtual void add(std::unique_ptr<TextTransformation> transformation) {
         return;
     }
-    virtual void remove(const std::shared_ptr<TextTransformation>& transformation) {
+    virtual void remove(std::unique_ptr<TextTransformation> transformation) {
         return;
     }
 
