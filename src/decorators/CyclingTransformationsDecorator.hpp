@@ -8,7 +8,7 @@
  */
 class CyclingTransformationsDecorator : public LabelDecoratorBase {
 public:
-    explicit CyclingTransformationsDecorator(std::shared_ptr<Label> label, std::vector<std::shared_ptr<TextTransformation>> transformations);
+    explicit CyclingTransformationsDecorator(std::unique_ptr<Label> label, const std::vector<std::unique_ptr<TextTransformation>>& transformations);
 
     /**
      * @brief decorates the text with a transformation chosen from the vector
@@ -18,7 +18,7 @@ public:
 
     bool operator==(const LabelDecoratorBase& other) const override;
 private:
-    std::vector<std::shared_ptr<TextTransformation>> transformations;
+    std::vector<std::unique_ptr<TextTransformation>> transformations;
     // index of the current transformation to be applied
     mutable size_t index = 0;
 };

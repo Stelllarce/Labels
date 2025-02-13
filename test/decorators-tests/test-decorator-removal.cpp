@@ -14,7 +14,7 @@
 
 SCENARIO("Removing a decorator when none has been applied") {
     GIVEN("A SimpleLabel") {
-        std::shared_ptr<Label> simple_label = std::make_shared<SimpleLabel>(" this label     describes  a    design pattern!  ");
+        std::unique_ptr<Label> simple_label = std::make_unique<SimpleLabel>(" this label     describes  a    design pattern!  ");
 
         THEN("The text should be unmodified") {
             REQUIRE(simple_label != nullptr);
@@ -22,7 +22,7 @@ SCENARIO("Removing a decorator when none has been applied") {
         }
 
         WHEN("A LeftTrimTransformation is removed") {
-            simple_label = LabelDecoratorBase::removeDecoratorFrom(simple_label, std::make_shared<TextTransformationDecorator>(
+            simple_label = LabelDecoratorBase::removeDecoratorFrom(std::move(simple_label), std::make_unique<TextTransformationDecorator>(
                 nullptr, std::make_unique<LeftTrimTransformation>()));
 
             THEN("The text should be unmodified") {
@@ -35,9 +35,9 @@ SCENARIO("Removing a decorator when none has been applied") {
 
 SCENARIO("Removing a single applied decorator") {
     GIVEN("A SimpleLabel with a LeftTrimTransformation applied") {
-        std::shared_ptr<Label> simple_label = std::make_shared<SimpleLabel>(" this label     describes  a    design pattern!  ");
+        std::unique_ptr<Label> simple_label = std::make_unique<SimpleLabel>(" this label     describes  a    design pattern!  ");
 
-        simple_label = std::make_shared<TextTransformationDecorator>(simple_label, std::make_unique<LeftTrimTransformation>());
+        simple_label = std::make_unique<TextTransformationDecorator>(std::move(simple_label), std::make_unique<LeftTrimTransformation>());
         
         THEN("Leading spaces should be removed") {
             REQUIRE(simple_label != nullptr);
@@ -46,8 +46,8 @@ SCENARIO("Removing a single applied decorator") {
 
         WHEN("The LeftTrimTransformation is removed") {
             simple_label = LabelDecoratorBase::removeDecoratorFrom(
-                simple_label,
-                std::make_shared<TextTransformationDecorator>(
+                std::move(simple_label),
+                std::make_unique<TextTransformationDecorator>(
                     nullptr, std::make_unique<LeftTrimTransformation>()));
 
             THEN("The text should be restored to its original state") {
@@ -60,13 +60,13 @@ SCENARIO("Removing a single applied decorator") {
 
 SCENARIO("Removing a decorator that is in the middle of a long chain of diffrent decorators") {
     GIVEN("A SimpleLabel") {
-        std::shared_ptr<Label> simple_label = std::make_shared<SimpleLabel>(" this label     describes  a    design pattern!  ");
+        std::unique_ptr<Label> simple_label = std::make_unique<SimpleLabel>(" this label     describes  a    design pattern!  ");
         AND_GIVEN("Five diffrent transformations stacked on top of it") {
-            simple_label = std::make_shared<TextTransformationDecorator>(simple_label, std::make_unique<LeftTrimTransformation>());
-            simple_label = std::make_shared<TextTransformationDecorator>(simple_label, std::make_unique<CapitalizeTransformation>());
-            simple_label = std::make_shared<TextTransformationDecorator>(simple_label, std::make_unique<NormalizeSpaceTransformation>());
-            simple_label = std::make_shared<TextTransformationDecorator>(simple_label, std::make_unique<RightTrimTransformation>());
-            simple_label = std::make_shared<TextTransformationDecorator>(simple_label, std::make_unique<ReplaceTransformation>("design", "factory"));
+            simple_label = std::make_unique<TextTransformationDecorator>(std::move(simple_label), std::make_unique<LeftTrimTransformation>());
+            simple_label = std::make_unique<TextTransformationDecorator>(std::move(simple_label), std::make_unique<CapitalizeTransformation>());
+            simple_label = std::make_unique<TextTransformationDecorator>(std::move(simple_label), std::make_unique<NormalizeSpaceTransformation>());
+            simple_label = std::make_unique<TextTransformationDecorator>(std::move(simple_label), std::make_unique<RightTrimTransformation>());
+            simple_label = std::make_unique<TextTransformationDecorator>(std::move(simple_label), std::make_unique<ReplaceTransformation>("design", "factory"));
 
             THEN("The text should be transformed correctly") {
                 REQUIRE(simple_label != nullptr);
@@ -75,8 +75,8 @@ SCENARIO("Removing a decorator that is in the middle of a long chain of diffrent
 
             WHEN("The NormalizeSpaceTransformation is removed") {
                 simple_label = LabelDecoratorBase::removeDecoratorFrom(
-                    simple_label,
-                    std::make_shared<TextTransformationDecorator>(
+                    std::move(simple_label),
+                    std::make_unique<TextTransformationDecorator>(
                         nullptr, std::make_unique<NormalizeSpaceTransformation>()));
 
                 THEN("The text should be restored to its previous state") {
@@ -90,11 +90,11 @@ SCENARIO("Removing a decorator that is in the middle of a long chain of diffrent
 
 SCENARIO("Removing a concrete transformation") {
     GIVEN("A SimpleLabel") {
-        std::shared_ptr<Label> simple_label = std::make_shared<SimpleLabel>(" this label     describes  a    design pattern!  ");
+        std::unique_ptr<Label> simple_label = std::make_unique<SimpleLabel>(" this label     describes  a    design pattern!  ");
         AND_GIVEN("Two diffrent replace transformations and one left trim transformation") {
-            simple_label = std::make_shared<TextTransformationDecorator>(simple_label, std::make_unique<ReplaceTransformation>("design", "factory"));
-            simple_label = std::make_shared<TextTransformationDecorator>(simple_label, std::make_unique<ReplaceTransformation>("label", "text"));
-            simple_label = std::make_shared<TextTransformationDecorator>(simple_label, std::make_unique<LeftTrimTransformation>());
+            simple_label = std::make_unique<TextTransformationDecorator>(std::move(simple_label), std::make_unique<ReplaceTransformation>("design", "factory"));
+            simple_label = std::make_unique<TextTransformationDecorator>(std::move(simple_label), std::make_unique<ReplaceTransformation>("label", "text"));
+            simple_label = std::make_unique<TextTransformationDecorator>(std::move(simple_label), std::make_unique<LeftTrimTransformation>());
 
             THEN("The text should be transformed correctly") {
                 REQUIRE(simple_label != nullptr);
@@ -103,8 +103,8 @@ SCENARIO("Removing a concrete transformation") {
 
             WHEN("The concrete ReplaceTransformation is removed") {
                 simple_label = LabelDecoratorBase::removeDecoratorFrom(
-                    simple_label,
-                    std::make_shared<TextTransformationDecorator>(
+                    std::move(simple_label),
+                    std::make_unique<TextTransformationDecorator>(
                         nullptr, std::make_unique<ReplaceTransformation>("label", "text")));
 
                 THEN("The text should be restored to its previous state") {
@@ -114,9 +114,9 @@ SCENARIO("Removing a concrete transformation") {
             }
         }
         AND_GIVEN("Two diffrent CensorTransformations and one RightTrimTransformation") {
-            simple_label = std::make_shared<TextTransformationDecorator>(simple_label, std::make_unique<CensorTransformation>("design"));
-            simple_label = std::make_shared<TextTransformationDecorator>(simple_label, std::make_unique<CensorTransformation>("label"));
-            simple_label = std::make_shared<TextTransformationDecorator>(simple_label, std::make_unique<RightTrimTransformation>());
+            simple_label = std::make_unique<TextTransformationDecorator>(std::move(simple_label), std::make_unique<CensorTransformation>("design"));
+            simple_label = std::make_unique<TextTransformationDecorator>(std::move(simple_label), std::make_unique<CensorTransformation>("label"));
+            simple_label = std::make_unique<TextTransformationDecorator>(std::move(simple_label), std::make_unique<RightTrimTransformation>());
 
             THEN("The text should be transformed correctly") {
                 REQUIRE(simple_label != nullptr);
@@ -125,8 +125,8 @@ SCENARIO("Removing a concrete transformation") {
 
             WHEN("The concrete CensorTransformation is removed") {
                 simple_label = LabelDecoratorBase::removeDecoratorFrom(
-                    simple_label,
-                    std::make_shared<TextTransformationDecorator>(
+                    std::move(simple_label),
+                    std::make_unique<TextTransformationDecorator>(
                         nullptr, std::make_unique<CensorTransformation>("label")));
 
                 THEN("The text should be restored to its previous state") {

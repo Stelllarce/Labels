@@ -13,7 +13,7 @@
 
 SCENARIO("Applying the CycleDecorator's transformations contigiously on a simple label") {
     GIVEN("A SimpleLabel") {
-        std::shared_ptr<Label> simple_label = std::make_shared<SimpleLabel>(" this is a simple  label ");
+        std::unique_ptr<Label> simple_label = std::make_unique<SimpleLabel>(" this is a simple  label ");
 
         THEN("The simple label should have been created correctly") {
             REQUIRE(simple_label != nullptr);
@@ -21,18 +21,18 @@ SCENARIO("Applying the CycleDecorator's transformations contigiously on a simple
         }
 
         AND_GIVEN("A vector of tranformations") {
-            std::vector<std::shared_ptr<TextTransformation>> transformations;
-            transformations.push_back(std::make_shared<LeftTrimTransformation>());
-            transformations.push_back(std::make_shared<CensorTransformation>("is"));
-            transformations.push_back(std::make_shared<CapitalizeTransformation>());
-            transformations.push_back(std::make_shared<RightTrimTransformation>());
-            transformations.push_back(std::make_shared<NormalizeSpaceTransformation>());
-            transformations.push_back(std::make_shared<ReplaceTransformation>("simple", "complex"));
-            transformations.push_back(std::make_shared<DecorateTransformation>());
+            std::vector<std::unique_ptr<TextTransformation>> transformations;
+            transformations.push_back(std::make_unique<LeftTrimTransformation>());
+            transformations.push_back(std::make_unique<CensorTransformation>("is"));
+            transformations.push_back(std::make_unique<CapitalizeTransformation>());
+            transformations.push_back(std::make_unique<RightTrimTransformation>());
+            transformations.push_back(std::make_unique<NormalizeSpaceTransformation>());
+            transformations.push_back(std::make_unique<ReplaceTransformation>("simple", "complex"));
+            transformations.push_back(std::make_unique<DecorateTransformation>());
             
             WHEN("A CyclingTransformationsDecorator is applied") {
 
-                simple_label = std::make_shared<CyclingTransformationsDecorator>(
+                simple_label = std::make_unique<CyclingTransformationsDecorator>(
                     std::move(simple_label), transformations);
 
                 THEN("A left trim should be applied") {

@@ -4,8 +4,11 @@
  * @param label the label to decorate
  * @param transformations the transformations to apply
  */
-CyclingTransformationsDecorator::CyclingTransformationsDecorator(std::shared_ptr<Label> label, std::vector<std::shared_ptr<TextTransformation>> transformations)
-    : LabelDecoratorBase(std::move(label)), transformations(transformations) {}
+CyclingTransformationsDecorator::CyclingTransformationsDecorator(std::unique_ptr<Label> label, const std::vector<std::unique_ptr<TextTransformation>>& transformations)
+    : LabelDecoratorBase(std::move(label)) {
+        for (const auto& transformation : transformations) 
+            this->transformations.push_back(transformation->clone());
+    }
 
 /**
  * @brief decorates the text with a transformation chosen from the vector
@@ -13,16 +16,16 @@ CyclingTransformationsDecorator::CyclingTransformationsDecorator(std::shared_ptr
  * transformation, it starts from the beginning
  */
 std::string CyclingTransformationsDecorator::getText() const {
-    if (!label) return "";
-    return transformations[index++ % transformations.size()]->transform(LabelDecoratorBase::label->getText());
+    if (!getLabel()) return "";
+    return transformations[index++ % transformations.size()]->transform(getLabel()->getText());
 }
 
 std::string CyclingTransformationsDecorator::getDetails() const{
-    return LabelDecoratorBase::label->getDetails();
+    return LabelDecoratorBase::getLabel()->getDetails();
 }
 
 bool CyclingTransformationsDecorator::operator==(const LabelDecoratorBase& other) const {
-    if (const CyclingTransformationsDecorator* derived = dynamic_cast<const CyclingTransformationsDecorator*>(&other)) {
+    if (const auto derived = dynamic_cast<const CyclingTransformationsDecorator*>(&other)) {
         for (size_t i = 0; i < transformations.size(); i++) {
             if (!(*(transformations[i]) == *(derived->transformations[i]))) return false;
         }

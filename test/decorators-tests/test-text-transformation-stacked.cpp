@@ -13,17 +13,17 @@
 SCENARIO("Applying sequential transformations on labels using TransformationDecorator") {
     
     GIVEN("A SimpleLabel and a RichLabel") {
-        std::shared_ptr<Label> simple_label = std::make_shared<SimpleLabel>(" this label     describes  a    design pattern!  ");
-        std::shared_ptr<Label> rich_label = std::make_shared<RichLabel>(
+        std::unique_ptr<Label> simple_label = std::make_unique<SimpleLabel>(" this label     describes  a    design pattern!  ");
+        std::unique_ptr<Label> rich_label = std::make_unique<RichLabel>(
             "   this is  another      label, that uses  a rich  font! ",
             std::make_unique<HexColor>(0x00FF00),
             std::make_unique<StyledFont>("Arial", 12)
         );
 
         WHEN("A LeftTrimTransformation is applied") {
-            simple_label = std::make_shared<TextTransformationDecorator>(
+            simple_label = std::make_unique<TextTransformationDecorator>(
                 std::move(simple_label), std::make_unique<LeftTrimTransformation>());
-            rich_label = std::make_shared<TextTransformationDecorator>(
+            rich_label = std::make_unique<TextTransformationDecorator>(
                 std::move(rich_label), std::make_unique<LeftTrimTransformation>());
 
             THEN("Leading spaces should be removed") {
@@ -32,9 +32,9 @@ SCENARIO("Applying sequential transformations on labels using TransformationDeco
             }
 
             AND_WHEN("A CapitalizeTransformation is applied") {
-                simple_label = std::make_shared<TextTransformationDecorator>(
+                simple_label = std::make_unique<TextTransformationDecorator>(
                     std::move(simple_label), std::make_unique<CapitalizeTransformation>());
-                rich_label = std::make_shared<TextTransformationDecorator>(
+                rich_label = std::make_unique<TextTransformationDecorator>(
                     std::move(rich_label), std::make_unique<CapitalizeTransformation>());
 
                 THEN("The text should start with an uppercase letter") {
@@ -43,9 +43,9 @@ SCENARIO("Applying sequential transformations on labels using TransformationDeco
                 }
 
                 AND_WHEN("A NormalizeSpaceTransformation is applied") {
-                    simple_label = std::make_shared<TextTransformationDecorator>(
+                    simple_label = std::make_unique<TextTransformationDecorator>(
                         std::move(simple_label), std::make_unique<NormalizeSpaceTransformation>());
-                    rich_label = std::make_shared<TextTransformationDecorator>(
+                    rich_label = std::make_unique<TextTransformationDecorator>(
                         std::move(rich_label), std::make_unique<NormalizeSpaceTransformation>());
 
                     THEN("Consecutive spaces should be reduced to a single space") {
@@ -54,9 +54,9 @@ SCENARIO("Applying sequential transformations on labels using TransformationDeco
                     }
 
                     AND_WHEN("A RightTrimTransformation is applied") {
-                        simple_label = std::make_shared<TextTransformationDecorator>(
+                        simple_label = std::make_unique<TextTransformationDecorator>(
                             std::move(simple_label), std::make_unique<RightTrimTransformation>());
-                        rich_label = std::make_shared<TextTransformationDecorator>(
+                        rich_label = std::make_unique<TextTransformationDecorator>(
                             std::move(rich_label), std::make_unique<RightTrimTransformation>());
 
                         THEN("Trailing spaces should be removed") {
@@ -64,9 +64,9 @@ SCENARIO("Applying sequential transformations on labels using TransformationDeco
                             REQUIRE(rich_label->getText() == "This is another label, that uses a rich font!");
                         }
                         AND_WHEN("A DecorateTransformation is applied") {
-                            simple_label = std::make_shared<TextTransformationDecorator>(
+                            simple_label = std::make_unique<TextTransformationDecorator>(
                                 std::move(simple_label), std::make_unique<DecorateTransformation>());
-                            rich_label = std::make_shared<TextTransformationDecorator>(
+                            rich_label = std::make_unique<TextTransformationDecorator>(
                                 std::move(rich_label), std::make_unique<DecorateTransformation>());
 
                             THEN("The text should be enclosed in square brackets") {
@@ -74,9 +74,9 @@ SCENARIO("Applying sequential transformations on labels using TransformationDeco
                                 REQUIRE(rich_label->getText() == "-={ This is another label, that uses a rich font! }=-");
                             }
                             AND_WHEN("A CensorTransformation is applied") {
-                                simple_label = std::make_shared<TextTransformationDecorator>(
+                                simple_label = std::make_unique<TextTransformationDecorator>(
                                     std::move(simple_label), std::make_unique<CensorTransformation>("label"));
-                                rich_label = std::make_shared<TextTransformationDecorator>(
+                                rich_label = std::make_unique<TextTransformationDecorator>(
                                     std::move(rich_label), std::make_unique<CensorTransformation>("is"));
 
                                 THEN("The text should be censored") {
@@ -84,9 +84,9 @@ SCENARIO("Applying sequential transformations on labels using TransformationDeco
                                     REQUIRE(rich_label->getText() == "-={ Th** ** another label, that uses a rich font! }=-");
                                 }
                                 AND_WHEN("A ReplaceTransformation is applied") {
-                                    simple_label = std::make_shared<TextTransformationDecorator>(
+                                    simple_label = std::make_unique<TextTransformationDecorator>(
                                         std::move(simple_label), std::make_unique<ReplaceTransformation>(" ", "_"));
-                                    rich_label = std::make_shared<TextTransformationDecorator>(
+                                    rich_label = std::make_unique<TextTransformationDecorator>(
                                         std::move(rich_label), std::make_unique<ReplaceTransformation>(" ", "_"));
 
                                     THEN("Spaces should be replaced with underscores") {

@@ -6,17 +6,19 @@
  */
 class LabelDecoratorBase : public Label {
 public:
-    explicit LabelDecoratorBase(const std::shared_ptr<Label>& label);
+    explicit LabelDecoratorBase(std::unique_ptr<Label> label);
 
     std::string getText() const override;
     std::string getDetails() const override;
 
-    static std::shared_ptr<Label> removeDecoratorFrom(std::shared_ptr<Label>& l, std::shared_ptr<LabelDecoratorBase>&& to_rm);
+    static std::unique_ptr<Label> removeDecoratorFrom(std::unique_ptr<Label> l, std::unique_ptr<LabelDecoratorBase> to_rm);
 
-    virtual bool operator==(const LabelDecoratorBase& other) const;
+    virtual bool operator==(const LabelDecoratorBase& rhs) const;
 
     virtual ~LabelDecoratorBase() = default;
-protected:
+private:
     // contains original label to decorate later
-    std::shared_ptr<Label> label;
+    std::unique_ptr<Label> label;
+protected:
+    Label* getLabel() const { return label.get(); }
 };

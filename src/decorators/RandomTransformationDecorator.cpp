@@ -6,12 +6,14 @@
  * @param seed for testing, defaults to current time if not given
  */
 RandomTransformationDecorator::RandomTransformationDecorator(
-    std::shared_ptr<Label> label, 
-    const std::vector<std::shared_ptr<TextTransformation>>& transformations,
+    std::unique_ptr<Label> label, 
+    const std::vector<std::unique_ptr<TextTransformation>>& transformations,
     long seed)
     : LabelDecoratorBase(std::move(label)), 
-    transformations(transformations),
-    seed(seed) {}
+    seed(seed) {
+        for (const auto& transformation : transformations) 
+            this->transformations.push_back(transformation->clone());
+    }
 
 /**
  * @brief generates a random number to pick a transformation from
@@ -19,15 +21,15 @@ RandomTransformationDecorator::RandomTransformationDecorator(
  * @return the decorated string
  */
 std::string RandomTransformationDecorator::getText() const {
-    if (!label) return "";
-    if (transformations.empty()) return LabelDecoratorBase::label->getText();
+    if (!getLabel()) return "";
+    if (transformations.empty()) return LabelDecoratorBase::getLabel()->getText();
     std::srand(seed);
     size_t random_index = std::rand() % transformations.size();
-    return transformations[random_index]->transform(LabelDecoratorBase::label->getText());
+    return transformations[random_index]->transform(LabelDecoratorBase::getLabel()->getText());
 }
 
 std::string RandomTransformationDecorator::getDetails() const {
-    return LabelDecoratorBase::label->getDetails();
+    return LabelDecoratorBase::getLabel()->getDetails();
 }
 
 bool RandomTransformationDecorator::operator==(const LabelDecoratorBase& other) const {
