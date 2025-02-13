@@ -6,4 +6,5 @@ target_sources(
     utils
     PRIVATE
         "HelpText.cpp"
+        "CensoredLetter.cpp"
 )
