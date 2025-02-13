@@ -2,6 +2,7 @@
 #include "utils/Complication.hpp"
 #include <string>
 #include <memory>
+#include <stdexcept>
 
 /**
  * @interface for all labels
@@ -20,11 +21,11 @@ public:
      */
     virtual std::string getDetails() const = 0;
     virtual std::string getHelpText() const { return ""; };
+    virtual void setHelpText(const std::string& help_text) {};
     virtual ~Label() = default;
 protected:
+    Label() = default;
     Label(std::unique_ptr<Complication> complication) : complication(std::move(complication)) {};
-    Label() {};
     Complication* getComplication() const { return complication.get(); }; 
-public:
     std::unique_ptr<Complication> complication;
 };

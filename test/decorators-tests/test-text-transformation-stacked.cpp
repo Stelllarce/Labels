@@ -16,8 +16,8 @@ SCENARIO("Applying sequential transformations on labels using TransformationDeco
         std::unique_ptr<Label> simple_label = std::make_unique<SimpleLabel>(" this label     describes  a    design pattern!  ");
         std::unique_ptr<Label> rich_label = std::make_unique<RichLabel>(
             "   this is  another      label, that uses  a rich  font! ",
-            std::make_unique<HexColor>(0x00FF00),
-            std::make_unique<StyledFont>("Arial", 12)
+            "#00FF00",
+            "Arial:12"
         );
 
         WHEN("A LeftTrimTransformation is applied") {

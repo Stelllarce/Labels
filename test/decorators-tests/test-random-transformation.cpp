@@ -16,8 +16,8 @@ SCENARIO("No transformations are given") {
         std::unique_ptr<Label> simple_label = std::make_unique<SimpleLabel>(" crap! This is  very bad! ");
         std::unique_ptr<Label> rich_label = std::make_unique<RichLabel>(
             " you   bad boy! Don't crap   on the  carpet!  ",
-            std::make_unique<HexColor>(0x00FF00),
-            std::make_unique<StyledFont>("Arial", 12)
+            "#00FF00",
+            "Arial:12"
         );
 
         std::vector<std::unique_ptr<TextTransformation>> transformations;
@@ -40,8 +40,8 @@ SCENARIO("Only one transformation is given inside the vector") {
         std::unique_ptr<Label> simple_label = std::make_unique<SimpleLabel>(" crap! This is  very bad! ");
         std::unique_ptr<Label> rich_label = std::make_unique<RichLabel>(
             " you   bad boy! Don't crap   on the  carpet!  ",
-            std::make_unique<HexColor>(0x00FF00),
-            std::make_unique<StyledFont>("Arial", 12)
+            "#00FF00",
+            "Arial:12"
         );
 
         std::vector<std::unique_ptr<TextTransformation>> transformations;
@@ -76,8 +76,8 @@ SCENARIO("Applying random transformations on labels") {
         std::unique_ptr<Label> simple_label = std::make_unique<SimpleLabel>(" crap! This is  very bad! ");
         std::unique_ptr<Label> rich_label = std::make_unique<RichLabel>(
             " you   bad boy! Don't crap   on the  carpet!  ",
-            std::make_unique<HexColor>(0x00FF00),
-            std::make_unique<StyledFont>("Arial", 12)
+            "#00FF00",
+            "Arial:12"
         );
 
         std::vector<std::unique_ptr<TextTransformation>> transformations;

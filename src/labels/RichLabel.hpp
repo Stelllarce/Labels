@@ -1,8 +1,6 @@
 #pragma once
 #include "SimpleLabel.hpp"
 #include "utils/HelpText.hpp"
-#include "utils/HexColor.hpp"
-#include "utils/StyledFont.hpp"
 #include <cstdint>
 #include <memory>
 
@@ -12,14 +10,15 @@
  */
 class RichLabel : public SimpleLabel {
 public:
-    explicit RichLabel(const std::string& value, std::unique_ptr<Color> color, std::unique_ptr<Font> font, std::unique_ptr<HelpText> complication);
-    explicit RichLabel(const std::string& value, std::unique_ptr<Color> color, std::unique_ptr<Font> font);
+    explicit RichLabel(const std::string& value, const std::string& color, const std::string& font, std::unique_ptr<HelpText> complication);
+    explicit RichLabel(const std::string& value, const std::string& color, const std::string& font);
     std::string getText() const override;
     std::string getFontInfo() const;
     std::string getColorString() const;
     std::string getDetails() const override;
     std::string getHelpText() const override;
+    void setHelpText(const std::string& help_txt) override;
 private:
-    std::unique_ptr<Complication> font;
-    std::unique_ptr<Complication> color;    
+    std::string font;
+    std::string color;    
 };
