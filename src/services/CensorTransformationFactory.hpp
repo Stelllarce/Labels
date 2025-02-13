@@ -5,6 +5,9 @@
 #include <memory>
 #include <string>
 
+/**
+ * @class Factory for creating CensorTransformations
+ */
 class CensorTransformationFactory {
 public:
     CensorTransformationFactory() = default;

@@ -11,6 +11,9 @@
 #include <string>
 #include <vector>
 
+/**
+ * @class Factory for creating text transformations
+ */
 class TransformationFactory {
 public:
     // Create single transformation from string command

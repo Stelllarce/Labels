@@ -1,6 +1,12 @@
 #include "LabelFactory.hpp"
 #include <sstream>
 
+/**
+ * @brief Helper function to parse options strings in format "key:value"
+ * @param options the options string
+ * @param key the key to search for
+ * @return the value corresponding to the key, or an empty string if not found
+ */
 std::string LabelFactory::getOption(const std::string& options, const std::string& key) {
     if (options.empty() || key.empty()) {
         return "";
@@ -18,6 +24,13 @@ std::string LabelFactory::getOption(const std::string& options, const std::strin
     return options.substr(start, end - start);
 }
 
+/**
+ * @brief Creates a label based on the type and options
+ * @param type the type of label to create
+ * @param text the text of the label
+ * @param options the options string
+ * @return a unique pointer to the created label
+ */
 std::unique_ptr<Label> LabelFactory::createLabel(
     const std::string& type,
     const std::string& text,

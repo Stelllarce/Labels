@@ -3,7 +3,9 @@
 #include <iostream>
 #include <sstream>
 
-
+/**
+ * @class prints labels to the output stream
+ */
 class LabelPrinter {
     static const char* const LABEL_PREFIX;
     static const char* const HELP_PREFIX;   

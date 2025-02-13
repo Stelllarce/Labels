@@ -6,6 +6,9 @@
 #include <memory>
 #include <string>
 
+/**
+ * @class Factory for creating label decorators
+ */
 class DecoratorFactory {
 public:
     // type: "simple", "cycling", or "random"

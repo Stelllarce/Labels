@@ -1,6 +1,8 @@
 #include "TransformationFactory.hpp"
 #include <sstream>
 
+// Helper function to extract a parameter from a command string
+// Hidden in an unnamed namespace to avoid polluting the global namespace
 namespace {
     std::string getParameter(const std::string& command, const std::string& param) {
         size_t pos = command.find(param + ":");
@@ -14,6 +16,12 @@ namespace {
     }
 }
 
+/**
+ * @brief Creates a single transformation from a command string
+ * @param command the command string
+ * @return shared pointer to the created transformation 
+ * or nullptr if the command is invalid
+ */
 std::shared_ptr<TextTransformation> TransformationFactory::createTransformation(
     const std::string& command) {
     

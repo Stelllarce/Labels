@@ -1,5 +1,8 @@
 #pragma once
 
+/**
+ * @class class that represents a letter that has been censored
+ */
 class CensoredLetter {
 public:
     explicit CensoredLetter(char original);

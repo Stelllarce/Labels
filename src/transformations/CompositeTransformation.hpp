@@ -3,6 +3,9 @@
 #include <vector>
 #include <memory>
 
+/**
+ * @class a composite transformation that applies multiple transformations in a row
+ */
 class CompositeTransformation : public TextTransformation {
 public:
     CompositeTransformation() = default;
@@ -10,6 +13,11 @@ public:
     explicit CompositeTransformation(std::vector<std::unique_ptr<TextTransformation>> transformations)
         : transformations(std::move(transformations)) {}
     
+    /**
+     * @brief creates a new CompositeTransformation with the given transformations
+     * @param args the transformations to add
+     * @return a unique pointer to the new CompositeTransformation
+     */
     template<typename... Args>
     static std::unique_ptr<CompositeTransformation> create(Args... args) {
         auto composite = std::make_unique<CompositeTransformation>();
@@ -41,10 +49,20 @@ public:
         return true;
     }
 
+    /**
+     * @brief adds a transformation to the composite
+     * @param transformation the transformation to add
+     * @post the transformation is added to the composite
+     */
     void add(std::unique_ptr<TextTransformation> transformation) {
         transformations.push_back(std::move(transformation));
     }
 
+    /**
+     * @brief removes a transformation from the composite
+     * @param transformation the transformation to remove
+     * @post the transformation is removed from the composite
+     */
     void remove(const TextTransformation& transformation) {
         for (auto it = transformations.begin(); it != transformations.end(); ++it) {
             if (transformation == **it) {

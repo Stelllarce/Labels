@@ -5,6 +5,9 @@
 #include <memory>
 #include <string>
 
+/**
+ * @class Factory for creating labels
+ */
 class LabelFactory {
 public:
     static std::unique_ptr<Label> createLabel(

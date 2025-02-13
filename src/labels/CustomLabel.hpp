@@ -5,7 +5,7 @@
 #include "utils/HelpText.hpp"
 
 /**
- * a label class that makes use of the proxy pattern
+ * @class label class that makes use of the proxy pattern
  */
 class CustomLabel : public Label {
 public:

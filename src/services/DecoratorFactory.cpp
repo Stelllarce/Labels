@@ -1,6 +1,8 @@
 #include "DecoratorFactory.hpp"
 #include <iostream>
 
+// Helper function to convert shared_ptr to unique_ptr
+// Hidden in a namespace to avoid polluting the global namespace
 namespace {
     std::vector<std::unique_ptr<TextTransformation>> convertToUnique(
         const std::vector<std::shared_ptr<TextTransformation>>& shared_transformations) {
@@ -24,6 +26,13 @@ namespace {
     }
 }
 
+/**
+ * @brief Creates a label decorator based on the type and transformation command
+ * @param type the type of decorator to create
+ * @param label the label to decorate
+ * @param transformCommand the transformation command to apply
+ * @return a unique pointer to the created decorator
+ */
 std::unique_ptr<LabelDecoratorBase> DecoratorFactory::createDecorator(
     const std::string& type,
     std::unique_ptr<Label> label,

@@ -14,6 +14,13 @@ std::string LabelDecoratorBase::getDetails() const {
     return label->getDetails();
 }
 
+/**
+ * @brief Removes a decorator from a label
+ * @note Works recursively like a linked list
+ * @param l label to remove decorator from
+ * @param to_rm decorator to remove
+ * @return the label without the decorator
+ */
 std::unique_ptr<Label> LabelDecoratorBase::removeDecoratorFrom(
     std::unique_ptr<Label> l,
     std::unique_ptr<LabelDecoratorBase> to_rm)
